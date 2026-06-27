@@ -1,0 +1,150 @@
+{
+  "users": [
+    {
+      "id": "ADMIN-01",
+      "email": "admin@pyvp.gov.pk",
+      "fullName": "PYVP Administration",
+      "phone": "+92 300 0000000",
+      "cnic": "37405-0000000-1",
+      "province": "Islamabad Capital Territory",
+      "constituency": "NA-48",
+      "gender": "Male",
+      "dob": "1990-01-01",
+      "education": "Master of Public Policy",
+      "bio": "Official Administrator Account for the Pakistan Youth Vision Parliament Portal.",
+      "passwordHash": "admin123",
+      "status": "approved",
+      "role": "admin",
+      "appliedAt": "2026-06-27T07:42:51.202Z",
+      "approvedAt": "2026-06-27T07:42:51.203Z",
+      "membershipId": "PYVP-ADMIN"
+    },
+    {
+      "id": "EXE-01",
+      "email": "chairman@pyvp.gov.pk",
+      "fullName": "Syed Hammad Hassan",
+      "phone": "+92 321 5551234",
+      "cnic": "35201-1234567-1",
+      "province": "Punjab",
+      "constituency": "NA-120",
+      "gender": "Male",
+      "dob": "1994-05-15",
+      "education": "M.Phil Political Science",
+      "bio": "Chairman of the Pakistan Youth Vision Parliament. Dedicated to enabling youth representation and national leadership frameworks across Pakistan.",
+      "passwordHash": "chairman123",
+      "status": "approved",
+      "role": "executive",
+      "executivePosition": "Chairman PYVP",
+      "appliedAt": "2025-10-01T08:00:00.000Z",
+      "approvedAt": "2025-10-05T12:00:00.000Z",
+      "membershipId": "PYVP-2025-0001",
+      "certificateNumber": "PYVP-CERT-250001",
+      "profilePic": ""
+    },
+    {
+      "id": "EXE-02",
+      "email": "waqarkhattak844@gmail.com",
+      "fullName": "Waqar Ahmad Khattak",
+      "phone": "+92 334 9876543",
+      "cnic": "11101-1234567-3",
+      "province": "Khyber Pakhtunkhwa",
+      "constituency": "NA-28",
+      "gender": "Male",
+      "dob": "1999-08-12",
+      "education": "B.Sc. Software Engineering",
+      "bio": "Youth Prime Minister of the PYVP. Tech-driven public servant aiming to build digital parliamentary processes for Pakistan.",
+      "passwordHash": "waqarkhattak",
+      "status": "approved",
+      "role": "executive",
+      "executivePosition": "Youth Prime Minister",
+      "appliedAt": "2025-10-02T09:00:00.000Z",
+      "approvedAt": "2025-10-05T12:30:00.000Z",
+      "membershipId": "PYVP-2025-0002",
+      "certificateNumber": "PYVP-CERT-250002",
+      "profilePic": ""
+    },
+    {
+      "id": "EXE-03",
+      "email": "ayeshamalik@pyvp.gov.pk",
+      "fullName": "Ayesha Malik",
+      "phone": "+92 301 2223344",
+      "cnic": "42101-9876543-2",
+      "province": "Sindh",
+      "constituency": "NA-244",
+      "gender": "Female",
+      "dob": "1998-11-20",
+      "education": "LL.B. Honours",
+      "bio": "Speaker of the Youth Assembly. Advocating for parliamentary discipline and strong youth integration in legal frameworks.",
+      "passwordHash": "ayesha123",
+      "status": "approved",
+      "role": "executive",
+      "executivePosition": "Speaker Youth Assembly",
+      "appliedAt": "2025-10-02T10:15:00.000Z",
+      "approvedAt": "2025-10-05T12:45:00.000Z",
+      "membershipId": "PYVP-2025-0003",
+      "certificateNumber": "PYVP-CERT-250003",
+      "profilePic": ""
+    }
+  ],
+  "events": [
+    {
+      "id": "evt-01",
+      "title": "Model Pakistan Youth Parliament Simulation",
+      "description": "A comprehensive 3-day simulated legislative workshop in Islamabad. Selected members from all provinces will draft, debate, and pass mock youth-focused resolutions regarding economic reforms, educational access, and IT infrastructure development.",
+      "date": "2026-08-15",
+      "location": "Prime Minister Youth Secretariat / National Assembly Hall, Islamabad",
+      "status": "upcoming"
+    },
+    {
+      "id": "evt-02",
+      "title": "National Youth Leadership & Policy Summit",
+      "description": "A prestigious assembly connecting Pakistan's youth leaders with veteran parliamentarians, federal ministers, and policy experts. Key topics include digital governance, public-private partnerships, and green initiatives.",
+      "date": "2026-09-22",
+      "location": "Convention Centre, Islamabad",
+      "status": "upcoming"
+    },
+    {
+      "id": "evt-03",
+      "title": "PYVP Youth Assembly Inaugural Session 2025",
+      "description": "The official swearing-in ceremony and constitutional drafting workshop for the newly selected executive cabinet of Pakistan Youth Vision Parliament.",
+      "date": "2025-10-15",
+      "location": "Youth Assembly Hall, Lahore",
+      "status": "completed"
+    }
+  ],
+  "news": [
+    {
+      "id": "news-01",
+      "title": "Pakistan Youth Vision Parliament Portal Launched",
+      "summary": "PYVP introduces an all-new digital system to steamline youth registration, application review, digital ID card issuance, and verification.",
+      "content": "Islamabad — In a historic step towards modernizing digital youth governance, the Chairman of the Pakistan Youth Vision Parliament (PYVP) has officially inaugurated the customized digital web portal. The system features streamlined application forms, dynamic verification portals with digital QR codes, custom member dashboards, and secure administrator reviews. 'This portal bridges the gap between state governance and youth ambition, making registration transparent and swift,' noted Syed Hammad Hassan during the press conference.",
+      "date": "2026-06-25",
+      "category": "Announcement"
+    },
+    {
+      "id": "news-02",
+      "title": "Youth PM Waqar Ahmad Khattak Outlines Tech Strategy",
+      "summary": "The newly inducted Youth Prime Minister of PYVP details plans to establish nationwide digital youth councils and tech-incubator access.",
+      "content": "Peshawar — Youth Prime Minister Waqar Ahmad Khattak has issued his executive tech directive, focusing on utilizing technology to expand PYVP's legislative feedback loop. Under the proposed plan, a dedicated feedback platform will collect youth opinions on cybersecurity, regional education policies, and job placement. 'We will ensure Pakistan's youth are not just users of technology, but architects of the regional governance that supports it,' Khattak emphasized in his state briefing.",
+      "date": "2026-06-26",
+      "category": "Legislative Update"
+    },
+    {
+      "id": "news-03",
+      "title": "Applications Open for National Youth Intake 2026",
+      "summary": "Young Pakistani citizens aged 18 to 32 are invited to apply for the upcoming simulated parliamentary term. Registration closes soon.",
+      "content": "National — The Pakistan Youth Vision Parliament has opened public registrations for the 2026 legislative sessions. Eligible candidates from Balochistan, Khyber Pakhtunkhwa, Punjab, Sindh, Gilgit-Baltistan, AJK, and Islamabad can submit their credentials via the official portal. Applicants will submit an official document (CNIC/B-Form) along with their nomination essay and EasyPaisa registration fee receipt. Selected applicants will receive official digital certificates and ID cards enabling full floor access.",
+      "date": "2026-06-20",
+      "category": "Press Release"
+    }
+  ],
+  "notifications": [
+    {
+      "id": "notif-01",
+      "userId": "all",
+      "title": "Intake 2026 Active",
+      "message": "Public applications are now open for the 2026 Youth Assembly Session. Please complete your registration and upload the required EasyPaisa payment receipt to proceed.",
+      "date": "2026-06-25T10:00:00.000Z"
+    }
+  ]
+}

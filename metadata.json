@@ -1,0 +1,6 @@
+{
+  "name": "Pakistan Youth Vision Parliament",
+  "description": "Official portal of the Pakistan Youth Vision Parliament (PYVP) with membership registration, verification portal, member dashboard, and admin controls.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
