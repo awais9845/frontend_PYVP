@@ -6,9 +6,7 @@ import { createServer as createViteServer } from "vite";
 const app = express();
 const PORT = 3000;
 
-// Increase body payload size limit to support Base64 file uploads (receipts and profile pictures)
-app.use(express.json({ limit: "20mb" }));
-app.use(express.urlencoded({ limit: "20mb", extended: true }));
+// Body parsers are conditionally loaded below to prevent consuming request streams before proxying.
 
 // Ensure data directory exists
 const DATA_DIR = path.join(process.cwd(), "data");
@@ -255,6 +253,10 @@ function writeDb(db: Database) {
 }
 
 // ================= API ENDPOINTS =================
+if (process.env.NODE_ENV === "production" || process.env.USE_MOCK === "true") {
+  app.use(express.json({ limit: "20mb" }));
+  app.use(express.urlencoded({ limit: "20mb", extended: true }));
+  console.log("🚀 Mock API Endpoints active in server.ts");
 
 // 1. Auth Endpoints
 app.post("/api/auth/register", (req, res) => {
@@ -712,6 +714,7 @@ app.post("/api/admin/notifications", (req, res) => {
     res.status(500).json({ error: e.message });
   }
 });
+} // END OF API ENDPOINTS
 
 // Serve frontend assets and SPA fallback
 const startServer = async () => {

@@ -1,9 +1,10 @@
 import React from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import HeaderBanner from "./components/HeaderBanner";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import { cancelAllPendingRequests } from "./services/axios";
 
 // Page Views
 import Home from "./pages/Home";
@@ -13,12 +14,18 @@ import Registration from "./pages/Registration";
 import Dashboard from "./pages/Dashboard";
 import AdminPanel from "./pages/AdminPanel";
 import Verification from "./pages/Verification";
+import ChairmanPortal from "./pages/ChairmanPortal";
 
 // Icon components for Toast
 import { AlertCircle, CheckCircle, Info, X } from "lucide-react";
 
 function MainAppLayout() {
   const { toast } = useAuth();
+  const location = useLocation();
+
+  React.useEffect(() => {
+    cancelAllPendingRequests(location.pathname);
+  }, [location.pathname]);
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-200 transition-colors duration-300">
@@ -38,6 +45,7 @@ function MainAppLayout() {
           <Route path="/verify" element={<Verification />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/admin" element={<AdminPanel />} />
+          <Route path="/cabinet" element={<ChairmanPortal />} />
           {/* Fallback to homepage */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

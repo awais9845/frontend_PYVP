@@ -1,236 +1,215 @@
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { 
+import { useDispatch, useSelector } from "react-redux";
+import {
   Users, Award, Calendar, Volume2, ShieldAlert, CheckCircle2,
   AlertCircle, Download, Trash2, Edit2, Plus, X, Eye, ArrowRight
 } from "lucide-react";
 import { User, Event, News } from "../types";
+import { AppDispatch, RootState } from "../store";
+import {
+  fetchAdminApplications,
+  approveApplicationThunk,
+  rejectApplicationThunk,
+  deleteUserThunk,
+  assignRoleThunk,
+} from "../store/slices/adminSlice";
+import { createEventThunk } from "../store/slices/eventsSlice";
+import { createNewsThunk }  from "../store/slices/newsSlice";
+
 
 export default function AdminPanel() {
   const { user, stats, fetchStats, triggerToast } = useAuth();
   const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
+  const { applications, loading } = useSelector((state: RootState) => state.admin);
+
+  // Use applications from Redux (field name is applicationStatus not status)
+  const applicants = applications;
 
   // Redirect if not admin
   useEffect(() => {
-    if (user && user.role !== "admin") {
+    if (user && user.role !== "admin" && user.role !== "superAdmin") {
       triggerToast("Access Denied", "This secure console is reserved for portal administrators.", "error");
       navigate("/dashboard");
     }
   }, [user]);
 
-  // Lists states
-  const [applicants, setApplicants] = useState<User[]>([]);
-  const [loading, setLoading] = useState(true);
+
 
   // Form states for creating Event
-  const [evtTitle, setEvtTitle] = useState("");
-  const [evtDesc, setEvtDesc] = useState("");
-  const [evtDate, setEvtDate] = useState("");
-  const [evtLoc, setEvtLoc] = useState("");
+  const [evtTitle, setEvtTitle]   = useState("");
+  const [evtDesc, setEvtDesc]     = useState("");
+  const [evtDate, setEvtDate]     = useState("");
+  const [evtLoc, setEvtLoc]       = useState("");
 
   // Form states for creating News
   const [newsTitle, setNewsTitle] = useState("");
-  const [newsSum, setNewsSum] = useState("");
+  const [newsSum, setNewsSum]     = useState("");
   const [newsContent, setNewsContent] = useState("");
-  const [newsCat, setNewsCat] = useState<"Announcement" | "Press Release" | "Legislative Update">("Announcement");
+  const [newsCat, setNewsCat]     = useState<"Announcement" | "Press Release" | "Legislative Update">("Announcement");
 
   // Selection states for review modal
-  const [selectedApplicant, setSelectedApplicant] = useState<User | null>(null);
-  
+  const [selectedApplicant, setSelectedApplicant] = useState<any | null>(null);
+
   // Roster role edits
   const [editingMemberId, setEditingMemberId] = useState<string | null>(null);
-  const [editRole, setEditRole] = useState<"member" | "executive">("member");
-  const [editPortfolio, setEditPortfolio] = useState("");
+  const [editRole, setEditRole]               = useState<"member" | "executive">("member");
+  const [editPortfolio, setEditPortfolio]     = useState("");
 
   // Sub-tab control
   const [adminTab, setAdminTab] = useState<"applications" | "roster" | "events" | "news" | "analytics">("applications");
 
+
   useEffect(() => {
-    if (user && user.role === "admin") {
+    if (user && (user.role === "admin" || user.role === "superAdmin")) {
       fetchAdminData();
     }
-  }, [user]);
+  }, [user?._id]);
 
   const fetchAdminData = async () => {
-    setLoading(true);
-    try {
-      const res = await fetch("/api/admin/applications");
-      if (res.ok) {
-        const data = await res.json();
-        setApplicants(data);
-      }
-    } catch (e) {
-      console.error("Error loading admin lists:", e);
-    } finally {
-      setLoading(false);
-    }
+    dispatch(fetchAdminApplications());
+    fetchStats();
   };
 
-  // Submit new Event
+
+  // Submit new Event using Redux thunk
   const handleEventSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!evtTitle || !evtDesc || !evtDate || !evtLoc) return;
 
     try {
-      const res = await fetch("/api/admin/events", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          title: evtTitle,
-          description: evtDesc,
-          date: evtDate,
-          location: evtLoc
-        })
-      });
-
-      if (res.ok) {
+      const result = await dispatch(createEventThunk({
+        title:       evtTitle,
+        description: evtDesc,
+        eventDate:   evtDate,
+        location:    evtLoc,
+        eventImage:  "",
+        announcedBy: (user as any)._id || "",
+        status:      "Upcoming",
+        isPublished: true,
+      }));
+      if (createEventThunk.fulfilled.match(result)) {
         triggerToast("Event Scheduled", "Assembly calendar successfully updated and broadcasted.", "success");
-        setEvtTitle("");
-        setEvtDesc("");
-        setEvtDate("");
-        setEvtLoc("");
+        setEvtTitle(""); setEvtDesc(""); setEvtDate(""); setEvtLoc("");
         fetchStats();
+      } else {
+        triggerToast("Error", "Failed to create event.", "error");
       }
     } catch (err) {
       triggerToast("Error", "Failed to register event.", "error");
     }
   };
 
-  // Submit new News/Announcement
+
+  // Submit new News using Redux thunk
   const handleNewsSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!newsTitle || !newsSum || !newsContent) return;
+    if (!newsTitle || !newsSum) return;
 
     try {
-      const res = await fetch("/api/admin/news", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          title: newsTitle,
-          summary: newsSum,
-          content: newsContent,
-          category: newsCat
-        })
-      });
-
-      if (res.ok) {
+      const result = await dispatch(createNewsThunk({
+        title:        newsTitle,
+        description:  `${newsSum}\n\n${newsContent}`,
+        newsImage:    "",
+        publishedBy:  (user as any)._id || "",
+        category:     newsCat as any,
+        isPublished:  true,
+      }));
+      if (createNewsThunk.fulfilled.match(result)) {
         triggerToast("News Published", "Legislative bulletin successfully saved.", "success");
-        setNewsTitle("");
-        setNewsSum("");
-        setNewsContent("");
+        setNewsTitle(""); setNewsSum(""); setNewsContent("");
+      } else {
+        triggerToast("Error", "Failed to publish news.", "error");
       }
     } catch (err) {
       triggerToast("Error", "Failed to publish news.", "error");
     }
   };
 
-  // Review (Approve/Reject) application
-  const handleReview = async (id: string, status: "approved" | "rejected") => {
-    try {
-      const res = await fetch(`/api/admin/applications/${id}/review`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ status })
-      });
 
-      if (res.ok) {
-        triggerToast(
-          `Application ${status === "approved" ? "Approved" : "Rejected"}`,
-          `Dossier status updated and notification triggered.`,
-          status === "approved" ? "success" : "info"
-        );
-        setSelectedApplicant(null);
-        fetchAdminData();
-        fetchStats();
-      }
+  // Review (Approve/Reject) application using Redux thunk
+  const handleReview = async (id: string, action: "approved" | "rejected") => {
+    try {
+      const result = action === "approved"
+        ? await dispatch(approveApplicationThunk(id))
+        : await dispatch(rejectApplicationThunk({ id }));
+
+      triggerToast(
+        `Application ${action === "approved" ? "Approved" : "Rejected"}`,
+        `Dossier status updated and notification triggered.`,
+        action === "approved" ? "success" : "info"
+      );
+      setSelectedApplicant(null);
+      fetchStats();
     } catch (err) {
       triggerToast("Error", "Application status update failed.", "error");
     }
   };
 
-  // Delete Member/Applicant completely
+
+  // Delete user using Redux thunk
   const handleDeleteMember = async (id: string) => {
     if (!window.confirm("Are you absolutely sure you want to delete this applicant file from records?")) return;
-
     try {
-      const res = await fetch(`/api/admin/members/${id}`, { method: "DELETE" });
-      if (res.ok) {
-        triggerToast("File Removed", "Applicant file permanently deleted from registry.", "info");
-        fetchAdminData();
-        fetchStats();
-      }
+      await dispatch(deleteUserThunk(id));
+      triggerToast("File Removed", "Applicant file permanently deleted from registry.", "info");
+      fetchStats();
     } catch (err) {
       triggerToast("Error", "File removal failed.", "error");
     }
   };
 
-  // Edit role & portfolio
+
+  // Edit role using Redux thunk
   const handleSaveRoleEdit = async (id: string) => {
     try {
-      const res = await fetch(`/api/admin/members/${id}/role`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          role: editRole,
-          executivePosition: editRole === "executive" ? editPortfolio : undefined
-        })
-      });
-
-      if (res.ok) {
-        triggerToast("Role Updated", "Member credentials successfully saved.", "success");
-        setEditingMemberId(null);
-        setEditPortfolio("");
-        fetchAdminData();
-        fetchStats();
-      }
+      await dispatch(assignRoleThunk({ id, role: editRole, portfolio: editRole === "executive" ? editPortfolio : undefined }));
+      triggerToast("Role Updated", "Member credentials successfully saved.", "success");
+      setEditingMemberId(null);
+      setEditPortfolio("");
+      fetchStats();
     } catch (e) {
       triggerToast("Error", "Failed to update member role.", "error");
     }
   };
 
-  // Export full member list to CSV
+
+  // Export full application list to CSV (uses real backend field names)
   const handleExportCSV = () => {
-    const approvedList = applicants.filter(u => u.status === "approved");
-    if (approvedList.length === 0) {
-      triggerToast("Export Failed", "There are currently no approved members to export.", "error");
+    if (applicants.length === 0) {
+      triggerToast("Export Failed", "There are currently no applications to export.", "error");
       return;
     }
 
-    // Header line
-    const headers = ["Member ID", "Certificate No", "Full Name", "Email", "Phone", "CNIC", "Province", "Constituency", "Role", "Portfolio", "Registration Date"];
-    
-    // Body lines
-    const rows = approvedList.map(u => [
-      u.membershipId || "",
-      u.certificateNumber || "",
-      u.fullName.replace(/,/g, " "),
-      u.email,
-      u.phone,
-      u.cnic,
-      u.province,
-      u.constituency,
-      u.role,
-      u.executivePosition || "N/A",
-      new Date(u.appliedAt).toLocaleDateString()
+    const headers = ["Application ID", "Full Name", "Email", "CNIC", "Education", "Status", "Date"];
+    const rows = applicants.map((a: any) => [
+      a._id || "",
+      (a.fullName || "").replace(/,/g, " "),
+      a.email || "",
+      a.cnic || "",
+      (a.education || "").replace(/,/g, " "),
+      a.applicationStatus || "",
+      a.createdAt ? new Date(a.createdAt).toLocaleDateString() : "",
     ]);
 
-    const csvContent = "data:text/csv;charset=utf-8," 
-      + [headers.join(","), ...rows.map(e => e.join(","))].join("\n");
+    const csvContent = "data:text/csv;charset=utf-8,"
+      + [headers.join(","), ...rows.map((e: any[]) => e.join(","))].join("\n");
 
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement("a");
     link.setAttribute("href", encodedUri);
-    link.setAttribute("download", `PYVP_Member_Roster_${new Date().getFullYear()}.csv`);
+    link.setAttribute("download", `PYVP_Applications_${new Date().getFullYear()}.csv`);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-
-    triggerToast("Export Successful", "Approved Roster saved as CSV successfully.", "success");
+    triggerToast("Export Successful", "Applications list saved as CSV.", "success");
   };
 
+
   // Security guard check
-  if (!user || user.role !== "admin") {
+  if (!user || !(["admin", "superAdmin"].includes(user.role))) {
     return (
       <div className="min-h-screen flex items-center justify-center p-6 bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-200">
         <div className="max-w-md w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-8 rounded-2xl shadow-xl text-center space-y-4">
@@ -240,7 +219,7 @@ export default function AdminPanel() {
             This module represents the administrative reviews panel. Access requires secure root administrator level tokens.
           </p>
           <div className="pt-2">
-            <button 
+            <button
               onClick={() => navigate("/dashboard")}
               className="px-6 py-2.5 bg-slate-900 text-white font-bold text-xs rounded-lg hover:bg-slate-800 transition-all"
             >
@@ -252,9 +231,10 @@ export default function AdminPanel() {
     );
   }
 
-  // Segment candidates
-  const pendingApps = applicants.filter(u => u.status === "pending");
-  const approvedMembers = applicants.filter(u => u.status === "approved");
+  // Segment candidates using real backend field applicationStatus
+  const pendingApps   = applicants.filter((u: any) => u.applicationStatus === "Pending" || u.applicationStatus === "Under Review");
+  const approvedMembersArr = applicants.filter((u: any) => u.applicationStatus === "Approved");
+
 
   return (
     <div className="bg-slate-50 dark:bg-slate-950 min-h-screen text-slate-800 dark:text-slate-200 transition-colors duration-300 font-sans pb-20">
@@ -293,7 +273,7 @@ export default function AdminPanel() {
         <div className="flex gap-1.5 border-b border-slate-200 dark:border-slate-800 overflow-x-auto pb-px">
           {[
             { id: "applications", name: "Review Applications", count: pendingApps.length, icon: Users },
-            { id: "roster", name: "Parliament Roster", count: approvedMembers.length, icon: Award },
+            { id: "roster", name: "Parliament Roster", count: approvedMembersArr.length, icon: Award },
             { id: "events", name: "Add Assembly Event", icon: Calendar },
             { id: "news", name: "Write Announcement", icon: Volume2 },
             { id: "analytics", name: "Provincial Statistics", icon: Award }
@@ -382,7 +362,7 @@ export default function AdminPanel() {
         {adminTab === "roster" && (
           <div className="mt-8 space-y-6">
             
-            {approvedMembers.length === 0 ? (
+            {approvedMembersArr.length === 0 ? (
               <div className="bg-white dark:bg-slate-900 border-2 border-dashed border-slate-100 dark:border-slate-800 p-12 text-center rounded-2xl">
                 <AlertCircle className="h-10 w-10 text-slate-300 mx-auto" />
                 <h4 className="font-heading font-bold text-base text-slate-900 dark:text-white mt-3">Roster is empty</h4>
@@ -402,7 +382,7 @@ export default function AdminPanel() {
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-50 dark:divide-slate-800/50">
-                      {approvedMembers.map((memb) => {
+                      {approvedMembersArr.map((memb) => {
                         const isEditing = editingMemberId === memb.id;
                         return (
                           <tr key={memb.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-950/20 transition-all">
@@ -746,13 +726,13 @@ export default function AdminPanel() {
                   {/* EasyPaisa receipt preview */}
                   <div className="space-y-1.5 text-center">
                     <span className="text-[10px] font-bold text-slate-500 block">Uploaded EasyPaisa Receipt</span>
-                    {selectedApplicant.paymentReceipt ? (
+                    {(selectedApplicant.receipt?.secure_url || selectedApplicant.paymentReceipt) ? (
                       <div className="border p-2 rounded-lg bg-slate-50 dark:bg-slate-950">
                         <img 
-                          src={selectedApplicant.paymentReceipt} 
+                          src={selectedApplicant.receipt?.secure_url || selectedApplicant.paymentReceipt} 
                           alt="Receipt Preview" 
                           className="h-32 mx-auto object-contain rounded hover:scale-105 transition-all cursor-pointer"
-                          onClick={() => window.open(selectedApplicant.paymentReceipt, "_blank")}
+                          onClick={() => window.open(selectedApplicant.receipt?.secure_url || selectedApplicant.paymentReceipt, "_blank")}
                         />
                       </div>
                     ) : (
@@ -765,13 +745,13 @@ export default function AdminPanel() {
                   {/* CNIC preview */}
                   <div className="space-y-1.5 text-center">
                     <span className="text-[10px] font-bold text-slate-500 block">Uploaded Identity Copy</span>
-                    {selectedApplicant.documentUrl ? (
+                    {(selectedApplicant.cnicFront?.secure_url || selectedApplicant.documentUrl) ? (
                       <div className="border p-2 rounded-lg bg-slate-50 dark:bg-slate-950">
                         <img 
-                          src={selectedApplicant.documentUrl} 
+                          src={selectedApplicant.cnicFront?.secure_url || selectedApplicant.documentUrl} 
                           alt="Doc Preview" 
                           className="h-32 mx-auto object-contain rounded hover:scale-105 transition-all cursor-pointer"
-                          onClick={() => window.open(selectedApplicant.documentUrl, "_blank")}
+                          onClick={() => window.open(selectedApplicant.cnicFront?.secure_url || selectedApplicant.documentUrl, "_blank")}
                         />
                       </div>
                     ) : (

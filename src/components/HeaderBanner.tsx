@@ -16,10 +16,14 @@ export default function HeaderBanner() {
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-1.5 text-emerald-300">
             <ShieldCheck className="h-4.5 w-4.5 text-gold-500 animate-pulse" />
-            <span className="font-heading tracking-wide uppercase font-semibold">Official Youth Assembly State Portal</span>
+            <span className="font-heading tracking-wide uppercase font-semibold">
+              Welcome to the Youth Assembly
+            </span>
           </div>
           <div className="hidden md:block h-3 w-[1px] bg-emerald-800"></div>
-          <span className="hidden md:inline text-slate-400">ISLAMABAD, ISLAMIC REPUBLIC OF PAKISTAN</span>
+          <span className="hidden md:inline text-slate-400">
+            ISLAMABAD, ISLAMIC REPUBLIC OF PAKISTAN
+          </span>
         </div>
 
         {/* Dynamic Helpers */}
@@ -27,11 +31,19 @@ export default function HeaderBanner() {
           <div className="flex items-center gap-1.5 text-slate-300">
             <Clock className="h-3.5 w-3.5 text-emerald-400" />
             <span className="font-mono">
-              {time.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" })} | {time.toLocaleTimeString()}
+              {time.toLocaleDateString("en-US", {
+                weekday: "short",
+                month: "short",
+                day: "numeric",
+              })}{" "}
+              | {time.toLocaleTimeString()}
             </span>
           </div>
           <div className="h-3 w-[1px] bg-emerald-800 hidden sm:block"></div>
-          <a href="tel:+9251111998" className="flex items-center gap-1 hover:text-gold-500 transition-colors">
+          <a
+            href="tel:+9251111998"
+            className="flex items-center gap-1 hover:text-gold-500 transition-colors"
+          >
             <Phone className="h-3 w-3 text-gold-500" />
             <span>+92 51 111-PYVP</span>
           </a>
