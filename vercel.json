@@ -1,11 +1,24 @@
+// {
+//   "routes": [
+//     {
+//       "handle": "filesystem"
+//     },
+//     {
+//       "src": "/.*",
+//       "dest": "/index.html"
+//     }
+//   ]
+// }
+
 {
-  "routes": [
+  "rewrites": [
     {
-      "handle": "filesystem"
+      "source": "/api/:path*",
+      "destination": "https://backend-pyvp.vercel.app/api/:path*"
     },
     {
-      "src": "/.*",
-      "dest": "/index.html"
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
