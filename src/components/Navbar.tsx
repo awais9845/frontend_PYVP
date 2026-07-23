@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { isChairmanUser } from "../services/authApi";
 import {
   Menu,
   X,
@@ -21,16 +22,7 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isDark, setIsDark] = useState(false);
 
-  const isChairmanOnly =
-    user &&
-    ((user.member &&
-      ((user.member as any).designation === "Chairman" ||
-        (user.member as any).executiveRole === "Chairman")) ||
-      user.email === "chairman@pyvp.gov.pk" ||
-      user.role === "admin" ||
-      user.role === "superAdmin" ||
-      user.role === "chairman" ||
-      (user as any).executivePosition === "Chairman PYVP");
+  const isChairmanOnly = isChairmanUser(user);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -61,7 +53,7 @@ export default function Navbar() {
     { name: "Home", path: "/" },
     { name: "About PYVP", path: "/about" },
     { name: "Executive Assembly", path: "/executives" },
-    { name: "Chairman's Portal", path: "/cabinet" },
+    ...(isChairmanOnly ? [{ name: "Chairman's Portal", path: "/cabinet" }] : []),
     { name: "Verification", path: "/verify" },
   ];
 
@@ -151,11 +143,15 @@ export default function Navbar() {
                   </div>
                 )}
                 <span className="max-w-[120px] truncate">{user.fullName}</span>
-                {user.role === "admin" && (
-                  <span className="text-[10px] bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20 px-1 rounded">
+                {isChairmanOnly ? (
+                  <span className="text-[10px] bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/30 px-1.5 py-0.5 rounded font-bold uppercase">
+                    Chairman
+                  </span>
+                ) : user.role === "admin" ? (
+                  <span className="text-[10px] bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20 px-1.5 py-0.5 rounded font-bold uppercase">
                     Admin
                   </span>
-                )}
+                ) : null}
               </Link>
 
               {/* Conditional Quick Admin Link */}
@@ -193,7 +189,7 @@ export default function Navbar() {
                 onClick={() => logout()}
                 className="px-4 py-2 rounded-lg text-sm font-bold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all"
               >
-                Member Sign In
+                Sign In
               </Link>
               <Link
                 to="/register"

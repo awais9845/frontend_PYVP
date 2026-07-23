@@ -41,6 +41,7 @@ import { getAllMembers } from "../services/memberApi";
 import * as eventService from "../services/eventApi";
 import * as newsService from "../services/newsApi";
 import * as announcementService from "../services/chairmanApi";
+import { isChairmanUser } from "../services/authApi";
 
 export default function ChairmanPortal() {
   const { user, logout, triggerToast } = useAuth();
@@ -62,19 +63,10 @@ export default function ChairmanPortal() {
   >("dashboard");
 
   // Authentication access control
-  const isChairman =
-    user &&
-    ((user.member &&
-      ((user.member as any).designation === "Chairman" ||
-        (user.member as any).executiveRole === "Chairman")) ||
-      user.email === "chairman@pyvp.gov.pk" ||
-      user.role === "admin" ||
-      user.role === "superAdmin" ||
-      user.role === "chairman" ||
-      (user as any).executivePosition === "Chairman PYVP");
+  const isChairman = isChairmanUser(user);
 
   useEffect(() => {
-    if (user && !isChairman) {
+    if (!user || !isChairman) {
       triggerToast(
         "Access Denied",
         "This legislative console is strictly restricted to the Chairman Secretariat.",
@@ -328,10 +320,7 @@ export default function ChairmanPortal() {
   }, [activeTab, user?._id, membersPage, appsPage]);
 
   const loadActiveTabData = async () => {
-    const hasCache = checkTabCache(activeTab);
-    if (!hasCache) {
-      setGlobalLoading(true);
-    }
+    setGlobalLoading(true);
     try {
       if (activeTab === "dashboard") {
         const res = await chairmanService.getOverviewStats();

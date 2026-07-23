@@ -76,35 +76,33 @@ export default function ChairmanDashboard() {
     "Deputy Secretary General",
     "President",
     "Vice President",
+    "Speaker Youth Assembly",
+    "Youth Prime Minister",
+    "MNA",
+    "MPA",
+    "Senator",
     "Director General (DG)",
     "Director Operations",
     "Director Administration",
     "Director Finance",
-    "Director Media & Communications",
-    "Director Public Relations (PR)",
-    "Director Legal Affairs",
-    "Director Information Technology (IT)",
-    "Information Secretary",
-    "Finance Secretary",
-    "Joint Secretary",
+    "Speaker Youth Assembly",
+    "Deputy Speaker",
+    "Federal Minister for Youth Affairs",
+    "Federal Minister for Law & Justice",
+    "Federal Minister for Foreign Affairs",
+    "Federal Minister for Information",
+    "Federal Minister for Finance",
+    "Federal Minister for Education",
+    "Federal Minister for Interior",
+    "Chairman Standing Committee",
     "Executive Member"
   ];
 
   // Strictly restrict to Chairman
-  const isChairman = user && (
-    (user.member && (
-      (user.member as any).designation === "Chairman" || 
-      (user.member as any).executiveRole === "Chairman"
-    )) || 
-    user.email === "chairman@pyvp.gov.pk" ||
-    user.role === "superAdmin" ||
-    user.role === "admin" ||
-    user.role === "chairman" ||
-    (user as any).executivePosition === "Chairman PYVP"
-  );
+  const isChairman = isChairmanUser(user);
 
   useEffect(() => {
-    if (user && !isChairman) {
+    if (!user || !isChairman) {
       triggerToast("Access Denied", "This legislative console is strictly restricted to the Chairman Secretariat.", "error");
       navigate("/dashboard");
     }

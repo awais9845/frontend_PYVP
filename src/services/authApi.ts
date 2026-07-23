@@ -57,3 +57,21 @@ export const getMe = async () => {
   const { data } = await api.get("/auth/me");
   return data; // { success, user }
 };
+
+// Helper: Check if a user has the Chairman role
+export const isChairmanUser = (user: any): boolean => {
+  if (!user) return false;
+  const role = String(user.role || "").toLowerCase();
+  const email = String(user.email || "").toLowerCase();
+  const desig = user.member ? String((user.member as any).designation || "").toLowerCase() : "";
+  const execRole = user.member ? String((user.member as any).executiveRole || "").toLowerCase() : "";
+  const execPos = String((user as any).executivePosition || "").toLowerCase();
+
+  return (
+    role === "chairman" ||
+    email === "chairman@pyvp.gov.pk" ||
+    desig === "chairman" ||
+    execRole === "chairman" ||
+    execPos.includes("chairman")
+  );
+};

@@ -16,8 +16,28 @@ import AdminPanel from "./pages/AdminPanel";
 import Verification from "./pages/Verification";
 import ChairmanPortal from "./pages/ChairmanPortal";
 
+import { isChairmanUser } from "./services/authApi";
+
 // Icon components for Toast
 import { AlertCircle, CheckCircle, Info, X } from "lucide-react";
+
+function ChairmanProtectedRoute({ children }: { children: React.ReactNode }) {
+  const { user, loading } = useAuth();
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-950">
+        <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-emerald-600"></div>
+      </div>
+    );
+  }
+
+  if (!user || !isChairmanUser(user)) {
+    return <Navigate to="/dashboard" replace />;
+  }
+
+  return <>{children}</>;
+}
 
 function MainAppLayout() {
   const { toast } = useAuth();
@@ -45,7 +65,30 @@ function MainAppLayout() {
           <Route path="/verify" element={<Verification />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/admin" element={<AdminPanel />} />
-          <Route path="/cabinet" element={<ChairmanPortal />} />
+          <Route
+            path="/cabinet"
+            element={
+              <ChairmanProtectedRoute>
+                <ChairmanPortal />
+              </ChairmanProtectedRoute>
+            }
+          />
+          <Route
+            path="/chairman"
+            element={
+              <ChairmanProtectedRoute>
+                <ChairmanPortal />
+              </ChairmanProtectedRoute>
+            }
+          />
+          <Route
+            path="/chairman/*"
+            element={
+              <ChairmanProtectedRoute>
+                <ChairmanPortal />
+              </ChairmanProtectedRoute>
+            }
+          />
           {/* Fallback to homepage */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

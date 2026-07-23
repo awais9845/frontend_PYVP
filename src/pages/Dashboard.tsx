@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getOptimizedCloudinaryUrl } from "../services/imageUtils";
+import { isChairmanUser } from "../services/authApi";
 import {
   User as UserIcon,
   Landmark,
@@ -22,6 +23,7 @@ import {
 } from "lucide-react";
 
 export default function Dashboard() {
+  const navigate = useNavigate();
   const {
     user,
     login,
@@ -34,6 +36,13 @@ export default function Dashboard() {
     loading,
     error,
   } = useAuth();
+
+  // Chairman auto-redirect effect
+  useEffect(() => {
+    if (user && isChairmanUser(user)) {
+      navigate("/cabinet", { replace: true });
+    }
+  }, [user, navigate]);
 
   // Login form states
   const [email, setEmail] = useState("");
@@ -66,7 +75,11 @@ export default function Dashboard() {
       setBio("");
       setProfilePic((user as any).profileImage?.secure_url || "");
     }
-  }, [user?._id, (user as any)?.phoneNumber, (user as any)?.profileImage?.secure_url]);
+  }, [
+    user?._id,
+    (user as any)?.phoneNumber,
+    (user as any)?.profileImage?.secure_url,
+  ]);
 
   // Fetch notifications once when user logs in/mounts
   useEffect(() => {
@@ -80,7 +93,7 @@ export default function Dashboard() {
     if (user?._id) {
       // Fetch immediately on mount/login to ensure fresh status
       refreshUser();
-      
+
       const interval = setInterval(() => {
         refreshUser();
       }, 60000); // Check every 60 seconds instead of 5 seconds to prevent server overload
@@ -185,7 +198,7 @@ export default function Dashboard() {
               <Landmark className="h-7 w-7 text-gold-200" />
             </div>
             <h2 className="font-heading font-extrabold text-2xl text-slate-900 dark:text-white tracking-tight">
-              Member Sign In Portal
+              Sign In here
             </h2>
             <p className="text-xs text-slate-500 dark:text-slate-400">
               Access your digital legislative workspace and certified ID card
@@ -275,16 +288,7 @@ export default function Dashboard() {
   // ---------------- VIEW B: FULL MEMBER WORKSPACE ----------------
   const isApproved = user.status === "approved";
   const userInit = user.fullName.charAt(0);
-  const isChairman =
-    user &&
-    ((user.member &&
-      ((user.member as any).designation === "Chairman" ||
-        (user.member as any).executiveRole === "Chairman")) ||
-      user.email === "chairman@pyvp.gov.pk" ||
-      user.role === "superAdmin" ||
-      user.role === "admin" ||
-      user.role === "chairman" ||
-      (user as any).executivePosition === "Chairman PYVP");
+  const isChairman = isChairmanUser(user);
 
   return (
     <div className="bg-slate-50 dark:bg-slate-950 min-h-screen text-slate-800 dark:text-slate-200 transition-colors duration-300 font-sans pb-20">
@@ -294,7 +298,11 @@ export default function Dashboard() {
           <div className="flex items-center gap-4">
             {user.profileImage?.secure_url || user.profilePic ? (
               <img
-                src={getOptimizedCloudinaryUrl(user.profileImage?.secure_url || user.profilePic, 120, 120)}
+                src={getOptimizedCloudinaryUrl(
+                  user.profileImage?.secure_url || user.profilePic,
+                  120,
+                  120,
+                )}
                 alt="pic"
                 className="h-16 w-16 rounded-full object-cover border-4 border-slate-900 shadow-md"
                 loading="lazy"
@@ -310,8 +318,8 @@ export default function Dashboard() {
                 <h1 className="font-heading font-bold text-2xl tracking-tight text-white">
                   {user.fullName}
                 </h1>
-                <span className="text-[10px] bg-white/10 border border-white/20 px-2 py-0.5 rounded font-bold uppercase">
-                  {(user.member as any)?.designation || user.role}
+                <span className="text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 px-2 py-0.5 rounded font-bold uppercase tracking-wider">
+                  {isChairman ? "Chairman" : ((user.member as any)?.designation || user.role)}
                 </span>
               </div>
               <p className="text-xs text-slate-300 flex items-center gap-1">

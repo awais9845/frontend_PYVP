@@ -29,7 +29,8 @@ export interface Member {
   email:           string;
   profileImage?:   string;
   designation:     "Member" | "Executive Member" | "President" | "Vice President" |
-                   "Secretary General" | "Deputy Secretary General" | "Chairman" | "Vice Chairman";
+                   "Secretary General" | "Deputy Secretary General" | "Chairman" | "Vice Chairman" |
+                   "Speaker Youth Assembly" | "Youth Prime Minister" | "MNA" | "MPA" | "Senator" | string;
   province?:       string;
   district?:       string;
   membershipType:  "General" | "Executive" | "Lifetime";

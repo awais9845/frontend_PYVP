@@ -70,9 +70,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setNotifications([]);
   }, []);
 
-  // ── Boot: fetch public stats once ────────────────────────────────────────────
+  // ── Boot: fetch public stats and sync latest user profile from server ────────
   useEffect(() => {
     fetchStats();
+    if (localStorage.getItem("pyvp_token") || localStorage.getItem("pyvp_user")) {
+      refreshUser();
+    }
   }, [fetchStats]);
 
   // ── Login ────────────────────────────────────────────────────────────────────
@@ -125,7 +128,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       if (registerThunk.fulfilled.match(result)) {
         const newUser = result.payload as AuthUser;
 
-        // Auto-submit the application record associated with the new user ID
+        // Submit the application record associated with the new user ID
         const appPayload = {
           user:          newUser._id,
           fullName:      formData.fullName,

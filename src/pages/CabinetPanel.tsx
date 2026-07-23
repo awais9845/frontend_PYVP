@@ -47,7 +47,7 @@ export default function CabinetPanel() {
   const [confirmCheckbox, setConfirmCheckbox] = useState(false);
   const [deleting, setDeleting] = useState(false);
 
-  // 17 Cabinet Roles
+  // Cabinet Roles
   const CABINET_ROLES = [
     "Chairman",
     "Vice Chairman",
@@ -55,6 +55,11 @@ export default function CabinetPanel() {
     "Deputy Secretary General",
     "President",
     "Vice President",
+    "Speaker Youth Assembly",
+    "Youth Prime Minister",
+    "MNA",
+    "MPA",
+    "Senator",
     "Director General (DG)",
     "Director Operations",
     "Director Administration",
@@ -69,19 +74,10 @@ export default function CabinetPanel() {
   ];
 
   // RBAC Access Guard (Only Chairman can access Cabinet Panel page)
-  const isChairman = user && (
-    (user.member && (
-      (user.member as any).designation === "Chairman" || 
-      (user.member as any).executiveRole === "Chairman"
-    )) || 
-    user.email === "chairman@pyvp.gov.pk" ||
-    (user as any).role === "superAdmin" ||
-    (user as any).role === "admin" ||
-    (user as any).executivePosition === "Chairman PYVP"
-  );
+  const isChairman = isChairmanUser(user);
 
   useEffect(() => {
-    if (user && !isChairman) {
+    if (!user || !isChairman) {
       triggerToast("Access Denied", "This cabinet console is reserved for the Secretariat Chairman.", "error");
       navigate("/dashboard");
     }
