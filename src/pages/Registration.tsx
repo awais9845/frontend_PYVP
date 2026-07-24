@@ -652,7 +652,7 @@ export default function Registration() {
                     className="w-full sm:w-auto px-8 py-3.5 bg-emerald-700 hover:bg-emerald-800 text-white font-bold rounded-lg transition-all text-sm shadow-md disabled:bg-slate-400"
                   >
                     {isSubmitting
-                      ? "Transmitting Candidate Packet..."
+                      ? "Submitting Application..."
                       : "Submit Application"}
                   </button>
                 </div>

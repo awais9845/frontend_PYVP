@@ -60,18 +60,18 @@ export default function Navbar() {
   return (
     <nav
       id="main-navigation"
-      className={`sticky top-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-white/95 dark:bg-slate-900/95 shadow-md py-3 backdrop-blur-md border-b border-slate-200 dark:border-slate-800"
-          : "bg-white dark:bg-slate-900 py-4 border-b border-slate-100 dark:border-slate-800"
-      }`}
+      className={`sticky top-0 z-50 transition-all duration-300 ${isScrolled
+        ? "bg-white/95 dark:bg-slate-900/95 shadow-md py-3 backdrop-blur-md border-b border-slate-200 dark:border-slate-800"
+        : "bg-white dark:bg-slate-900 py-4 border-b border-slate-100 dark:border-slate-800"
+        }`}
     >
       <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-8 flex items-center justify-between">
-        {/* Logo / Crest Title */}
         <Link to="/" className="flex items-center gap-2 sm:gap-3 group">
-          <div className="h-9 w-9 sm:h-11 sm:w-11 rounded-full bg-emerald-600 dark:bg-emerald-700 text-white flex items-center justify-center shadow-md shadow-emerald-600/20 group-hover:scale-105 transition-all duration-300 shrink-0">
-            <Landmark className="h-5 w-5 sm:h-6 sm:w-6 text-gold-200" />
-          </div>
+          <img
+            src="https://res.cloudinary.com/rgvvrye1/image/upload/v1784959506/pyvp/receipts/recj9aep6gfa5skfh5u1.png"
+            alt="PYVP Logo"
+            className="h-9 w-9 sm:h-11 sm:w-11 rounded-full object-cover shadow-md shadow-emerald-600/20 group-hover:scale-150 transition-all duration-300 shrink-0"
+          />
           <div>
             <div className="flex items-center gap-1.5">
               <span className="font-heading font-bold text-base sm:text-lg leading-none tracking-tight text-slate-800 dark:text-slate-100">
@@ -95,11 +95,10 @@ export default function Navbar() {
               <Link
                 key={link.name}
                 to={link.path}
-                className={`px-3.5 py-2 rounded-lg text-sm font-semibold transition-all duration-200 relative ${
-                  isActive
-                    ? "text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/40"
-                    : "text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-slate-50 dark:hover:bg-slate-800/50"
-                }`}
+                className={`px-3.5 py-2 rounded-lg text-sm font-semibold transition-all duration-200 relative ${isActive
+                  ? "text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/40"
+                  : "text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-slate-50 dark:hover:bg-slate-800/50"
+                  }`}
               >
                 {link.name}
                 {isActive && (
@@ -234,11 +233,10 @@ export default function Navbar() {
                   key={link.name}
                   to={link.path}
                   onClick={() => setIsOpen(false)}
-                  className={`px-4 py-2.5 rounded-lg text-sm font-bold transition-all ${
-                    isActive
-                      ? "text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/45 border-l-4 border-emerald-600"
-                      : "text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800"
-                  }`}
+                  className={`px-4 py-2.5 rounded-lg text-sm font-bold transition-all ${isActive
+                    ? "text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/45 border-l-4 border-emerald-600"
+                    : "text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800"
+                    }`}
                 >
                   {link.name}
                 </Link>

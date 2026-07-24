@@ -34,10 +34,11 @@ export default function Footer() {
 
             <div className="pt-2 flex gap-3 text-slate-400">
               <span className="text-xs font-bold text-emerald-400 uppercase tracking-wider">
-                Mission:
+                OUR MOTTO:
               </span>
               <span className="text-xs italic text-slate-300">
-                Inspiring Leadership and Serving the Nation
+                To prepare the generation of today to face the challenges of
+                tomorrow
               </span>
             </div>
           </div>

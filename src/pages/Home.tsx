@@ -21,6 +21,8 @@ import {
 import { getPublishedNews } from "../services/newsApi";
 import { getPublicEvents } from "../services/eventApi";
 import { getAnnouncement } from "../services/chairmanApi";
+import { getAllMembers } from "../services/memberApi";
+import { getOptimizedCloudinaryUrl } from "../services/imageUtils";
 import { News, Event } from "../types";
 
 export default function Home() {
@@ -32,6 +34,7 @@ export default function Home() {
   const [loadingNews, setLoadingNews] = useState(true);
   const [homeSearchQuery, setHomeSearchQuery] = useState("");
   const [announcement, setAnnouncement] = useState<any | null>(null);
+  const [chairmanPic, setChairmanPic] = useState<string | null>(null);
 
   useEffect(() => {
     fetchStats();
@@ -40,10 +43,11 @@ export default function Home() {
 
   const fetchPublicData = async () => {
     try {
-      const [newsData, eventsData, annData] = await Promise.all([
+      const [newsData, eventsData, annData, membersData] = await Promise.all([
         getPublishedNews(),
         getPublicEvents(),
         getAnnouncement(),
+        getAllMembers().catch(() => null),
       ]);
       if (newsData?.news) {
         setNews(newsData.news);
@@ -53,6 +57,20 @@ export default function Home() {
       }
       if (annData?.success && annData?.announcement) {
         setAnnouncement(annData.announcement);
+      }
+      if (membersData?.success && Array.isArray(membersData?.members)) {
+        const chairman = membersData.members.find(
+          (m: any) =>
+            m.designation === "Chairman" ||
+            m.designation === "Chairman, PYVP" ||
+            m.designation === "Chairman PYVP" ||
+            m.role === "admin" ||
+            (m.executiveRole && m.executiveRole.toLowerCase().includes("chairman"))
+        );
+        if (chairman) {
+          const pic = chairman.profilePic || chairman.profileImage?.secure_url;
+          if (pic) setChairmanPic(pic);
+        }
       }
     } catch (e) {
       console.error("Error fetching homepage records:", e);
@@ -157,67 +175,56 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Bento Card 2: Quick Credentials Registry Search (4 cols on desktop) */}
-          <div className="md:col-span-1 lg:col-span-4 bg-indigo-50/50 dark:bg-slate-900 border border-indigo-100 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-sm flex flex-col justify-between group transition-all hover:shadow-md">
+          {/* Bento Card 2: Office of the Chairman (4 cols on desktop) */}
+          <div className="md:col-span-1 lg:col-span-4 bg-linear-to-b from-emerald-950/40 via-slate-900 to-slate-900 border border-emerald-800/40 rounded-3xl p-5 sm:p-6 shadow-sm flex flex-col justify-between group transition-all hover:shadow-md text-white">
             <div className="space-y-4">
               <div className="flex items-center justify-between">
-                <span className="text-indigo-700 dark:text-indigo-400 text-[10px] font-bold uppercase tracking-wider bg-indigo-100 dark:bg-indigo-950/50 px-2.5 py-1 rounded-full border border-indigo-200 dark:border-indigo-900/40">
-                  Sovereign Ledger
+                <span className="text-gold-400 text-[10px] font-bold uppercase tracking-wider bg-gold-500/10 px-2.5 py-1 rounded-full border border-gold-500/20">
+                  Office of the Chairman
                 </span>
-                <ShieldCheck className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
+                <Award className="h-5 w-5 text-gold-400 shrink-0" />
               </div>
 
-              <div className="space-y-1">
-                <h3 className="font-heading font-extrabold text-lg text-slate-900 dark:text-white">
-                  Quick Credentials Verification
-                </h3>
-                <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-                  Verify a certified Member ID instantly or access our secure QR
-                  matrix scanner.
-                </p>
-              </div>
-
-              {/* Form Input directly on Home Screen */}
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  if (homeSearchQuery.trim()) {
-                    navigate(
-                      `/verify?id=${encodeURIComponent(homeSearchQuery.trim())}`,
-                    );
-                  }
-                }}
-                className="space-y-2 pt-2"
-              >
-                <div className="relative">
-                  <input
-                    type="text"
-                    required
-                    value={homeSearchQuery}
-                    onChange={(e) => setHomeSearchQuery(e.target.value)}
-                    placeholder="Enter ID (e.g. PYVP-2025-0002)"
-                    className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 focus:border-indigo-500 outline-none text-xs font-mono"
+              <div className="flex items-center gap-3 pt-2">
+                {chairmanPic ? (
+                  <img
+                    src={getOptimizedCloudinaryUrl(chairmanPic, 96, 96)}
+                    alt="Muhammad Waqar"
+                    className="h-12 w-12 rounded-full object-cover border-2 border-gold-500/40 shadow-md shrink-0"
+                    onError={(e) => {
+                      (e.target as HTMLElement).style.display = "none";
+                      setChairmanPic(null);
+                    }}
                   />
-                  <Search className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
+                ) : (
+                  <div className="h-12 w-12 rounded-full bg-emerald-800 border-2 border-gold-500/40 flex items-center justify-center font-bold text-gold-200 shadow-md shrink-0">
+                    <Landmark className="h-6 w-6 text-gold-200" />
+                  </div>
+                )}
+                <div>
+                  <h3 className="font-heading font-extrabold text-base text-white leading-tight">
+                    Muhammad Waqar
+                  </h3>
+                  <p className="text-[11px] text-emerald-400 font-medium">
+                    Chairman, PYVP
+                  </p>
                 </div>
-                <button
-                  type="submit"
-                  className="w-full py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold rounded-xl transition-all shadow-md flex items-center justify-center gap-1.5 cursor-pointer"
-                >
-                  Query Ledger <ArrowUpRight className="h-3.5 w-3.5" />
-                </button>
-              </form>
+              </div>
+
+              <p className="text-xs text-slate-300 leading-relaxed font-light">
+                "Directing constitutional design, legislative youth debates, and
+                statecraft training for ambitious young leaders across Pakistan."
+              </p>
             </div>
 
-            {/* Quick Suggestions buttons */}
-            <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 text-[10px] text-slate-400 flex flex-wrap gap-2 items-center">
-              <span>Try Demo ID:</span>
-              <button
-                onClick={() => setHomeSearchQuery("PYVP-2025-0002")}
-                className="font-mono bg-white dark:bg-slate-950 px-2 py-0.5 rounded border border-slate-200 dark:border-slate-850 hover:border-indigo-600 hover:text-indigo-700 text-[10px] cursor-pointer"
+            <div className="mt-6 pt-3 border-t border-emerald-900/60 flex items-center justify-between text-[11px]">
+              <span className="text-slate-400 font-mono">Supreme Council</span>
+              <Link
+                to="/executives"
+                className="font-bold text-gold-400 hover:text-gold-300 flex items-center gap-1 transition-colors cursor-pointer"
               >
-                PYVP-2025-0002
-              </button>
+                Executive Cabinet <ArrowUpRight className="h-3.5 w-3.5" />
+              </Link>
             </div>
           </div>
 
