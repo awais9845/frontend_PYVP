@@ -23,7 +23,12 @@ interface AuthState {
 }
 
 // ── Initial State ─────────────────────────────────────────────────────────────
-const storedUser = localStorage.getItem("pyvp_user");
+const isSessionActive = typeof window !== "undefined" && sessionStorage.getItem("pyvp_session_active") === "true";
+if (!isSessionActive) {
+  localStorage.removeItem("pyvp_user");
+  localStorage.removeItem("pyvp_token");
+}
+const storedUser = isSessionActive ? localStorage.getItem("pyvp_user") : null;
 const initialState: AuthState = {
   user:            storedUser ? JSON.parse(storedUser) : null,
   loading:         false,
@@ -115,12 +120,14 @@ const authSlice = createSlice({
     setUser(state, action: PayloadAction<AuthUser>) {
       state.user            = action.payload;
       state.isAuthenticated = true;
+      sessionStorage.setItem("pyvp_session_active", "true");
       localStorage.setItem("pyvp_user", JSON.stringify(action.payload));
     },
     clearUser(state) {
       state.user            = null;
       state.isAuthenticated = false;
       state.error           = null;
+      sessionStorage.removeItem("pyvp_session_active");
       localStorage.removeItem("pyvp_user");
       localStorage.removeItem("pyvp_token");
     },
@@ -136,6 +143,7 @@ const authSlice = createSlice({
         state.loading         = false;
         state.user            = action.payload;
         state.isAuthenticated = true;
+        sessionStorage.setItem("pyvp_session_active", "true");
         if (action.payload) {
           localStorage.setItem("pyvp_user", JSON.stringify(action.payload));
         }
@@ -155,6 +163,7 @@ const authSlice = createSlice({
         state.loading         = false;
         state.user            = action.payload;
         state.isAuthenticated = true;
+        sessionStorage.setItem("pyvp_session_active", "true");
         if (action.payload) {
           localStorage.setItem("pyvp_user", JSON.stringify(action.payload));
         }
@@ -169,6 +178,7 @@ const authSlice = createSlice({
       .addCase(logoutThunk.fulfilled, (state) => {
         state.user            = null;
         state.isAuthenticated = false;
+        sessionStorage.removeItem("pyvp_session_active");
         localStorage.removeItem("pyvp_user");
         localStorage.removeItem("pyvp_token");
       })
@@ -176,6 +186,7 @@ const authSlice = createSlice({
         // Clear anyway
         state.user            = null;
         state.isAuthenticated = false;
+        sessionStorage.removeItem("pyvp_session_active");
         localStorage.removeItem("pyvp_user");
         localStorage.removeItem("pyvp_token");
       });
