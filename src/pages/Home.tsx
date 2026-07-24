@@ -34,7 +34,9 @@ export default function Home() {
   const [loadingNews, setLoadingNews] = useState(true);
   const [homeSearchQuery, setHomeSearchQuery] = useState("");
   const [announcement, setAnnouncement] = useState<any | null>(null);
-  const [chairmanPic, setChairmanPic] = useState<string | null>(null);
+  const [chairmanPic, setChairmanPic] = useState<string | null>(
+    "https://res.cloudinary.com/rgvvrye1/image/upload/v1784964927/pyvp/profiles/s9alen2npfw3olc7wwsx.jpg",
+  );
 
   useEffect(() => {
     fetchStats();
@@ -65,7 +67,8 @@ export default function Home() {
             m.designation === "Chairman, PYVP" ||
             m.designation === "Chairman PYVP" ||
             m.role === "admin" ||
-            (m.executiveRole && m.executiveRole.toLowerCase().includes("chairman"))
+            (m.executiveRole &&
+              m.executiveRole.toLowerCase().includes("chairman")),
         );
         if (chairman) {
           const pic = chairman.profilePic || chairman.profileImage?.secure_url;
@@ -176,54 +179,85 @@ export default function Home() {
           </div>
 
           {/* Bento Card 2: Office of the Chairman (4 cols on desktop) */}
-          <div className="md:col-span-1 lg:col-span-4 bg-linear-to-b from-emerald-950/40 via-slate-900 to-slate-900 border border-emerald-800/40 rounded-3xl p-5 sm:p-6 shadow-sm flex flex-col justify-between group transition-all hover:shadow-md text-white">
-            <div className="space-y-4">
+          <div className="md:col-span-1 lg:col-span-4 relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-950 to-emerald-950 border border-emerald-500/25 hover:border-gold-500/40 rounded-3xl p-5 sm:p-6 shadow-xl flex flex-col justify-between group transition-all duration-300 hover:shadow-2xl hover:shadow-emerald-950/50 text-white">
+            {/* Background Decorative Ambient Radial Glow */}
+            <div className="absolute -top-16 -right-16 w-48 h-48 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none group-hover:bg-amber-500/15 transition-all duration-500" />
+            <div className="absolute -bottom-16 -left-16 w-48 h-48 bg-emerald-700/10 rounded-full blur-3xl pointer-events-none" />
+
+            <div className="space-y-4 relative z-10">
+              {/* Header Ribbon */}
               <div className="flex items-center justify-between">
-                <span className="text-gold-400 text-[10px] font-bold uppercase tracking-wider bg-gold-500/10 px-2.5 py-1 rounded-full border border-gold-500/20">
+                <span className="text-amber-300 text-[10px] font-bold uppercase tracking-widest bg-gradient-to-r from-amber-500/15 via-emerald-500/10 to-transparent px-3 py-1 rounded-full border border-amber-500/30 flex items-center gap-1.5 shadow-xs">
+                  <Award className="h-3.5 w-3.5 text-amber-400" />
                   Office of the Chairman
                 </span>
-                <Award className="h-5 w-5 text-gold-400 shrink-0" />
+                <div className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse shadow-sm shadow-emerald-400/50" />
               </div>
 
-              <div className="flex items-center gap-3 pt-2">
-                {chairmanPic ? (
+              {/* Chairman Identity Container */}
+              <div className="flex items-center gap-3.5 pt-1">
+                <div className="relative shrink-0">
+                  <div className="absolute -inset-0.5 bg-gradient-to-r from-amber-400 to-emerald-500 rounded-full blur-xs opacity-75 group-hover:opacity-100 transition duration-300" />
                   <img
-                    src={getOptimizedCloudinaryUrl(chairmanPic, 96, 96)}
-                    alt="Muhammad Waqar"
-                    className="h-12 w-12 rounded-full object-cover border-2 border-gold-500/40 shadow-md shrink-0"
+                    src={getOptimizedCloudinaryUrl(
+                      chairmanPic ||
+                        "https://res.cloudinary.com/rgvvrye1/image/upload/v1784964927/pyvp/profiles/s9alen2npfw3olc7wwsx.jpg",
+                      160,
+                      160
+                    )}
+                    alt="Hafiz Huzaifa Shah"
+                    className="relative h-16 w-16 sm:h-20 sm:w-20 rounded-full object-cover border-2 border-slate-900 shadow-xl group-hover:scale-105 transition-transform duration-300"
                     onError={(e) => {
-                      (e.target as HTMLElement).style.display = "none";
-                      setChairmanPic(null);
+                      (e.target as HTMLImageElement).src =
+                        "https://res.cloudinary.com/rgvvrye1/image/upload/v1784964927/pyvp/profiles/s9alen2npfw3olc7wwsx.jpg";
                     }}
                   />
-                ) : (
-                  <div className="h-12 w-12 rounded-full bg-emerald-800 border-2 border-gold-500/40 flex items-center justify-center font-bold text-gold-200 shadow-md shrink-0">
-                    <Landmark className="h-6 w-6 text-gold-200" />
-                  </div>
-                )}
+                </div>
                 <div>
-                  <h3 className="font-heading font-extrabold text-base text-white leading-tight">
-                    Muhammad Waqar
+                  <h3 className="font-heading font-extrabold text-lg sm:text-xl text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-100 to-slate-300 leading-tight">
+                    Hafiz Huzaifa Shah
                   </h3>
-                  <p className="text-[11px] text-emerald-400 font-medium">
+                  <p className="text-xs text-emerald-400 font-semibold flex items-center gap-1 mt-0.5">
+                    <span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-400" />
                     Chairman, PYVP
                   </p>
                 </div>
               </div>
 
-              <p className="text-xs text-slate-300 leading-relaxed font-light">
-                "Directing constitutional design, legislative youth debates, and
-                statecraft training for ambitious young leaders across Pakistan."
-              </p>
+              {/* Message Block */}
+              <div className="bg-slate-900/60 backdrop-blur-xs border border-white/5 rounded-2xl p-3.5 space-y-2">
+                <div className="flex items-center gap-1.5 text-amber-300/90 text-[11px] font-bold tracking-wide uppercase">
+                  <Quote className="h-3.5 w-3.5 text-amber-400 rotate-180" />
+                  <span>Chairman’s Message</span>
+                </div>
+                <p className="text-xs text-slate-300 leading-relaxed font-light">
+                  Welcome to Pakistan Youth Vision Parliament. Our mission is to
+                  empower, educate, and inspire the youth of Pakistan to become
+                  responsible leaders, active citizens, and agents of positive
+                  change. We believe that today’s youth are the architects of
+                  tomorrow’s Pakistan.
+                  <br className="my-1" /> Through leadership development, civic
+                  engagement, policy dialogue, and national unity, we are
+                  committed to providing every young person with a platform to
+                  learn, lead, and serve.
+                  <br className="my-1" /> Together, let us build a stronger, more
+                  progressive, and united Pakistan.
+                </p>
+              </div>
             </div>
 
-            <div className="mt-6 pt-3 border-t border-emerald-900/60 flex items-center justify-between text-[11px]">
-              <span className="text-slate-400 font-mono">Supreme Council</span>
+            {/* Card Footer Navigation */}
+            <div className="mt-5 pt-3 border-t border-emerald-900/60 flex items-center justify-between text-[11px] relative z-10">
+              <span className="text-slate-400 font-mono flex items-center gap-1">
+                <span className="h-1.5 w-1.5 rounded-full bg-amber-400/80" />
+                Supreme Council
+              </span>
               <Link
                 to="/executives"
-                className="font-bold text-gold-400 hover:text-gold-300 flex items-center gap-1 transition-colors cursor-pointer"
+                className="font-bold text-amber-300 hover:text-amber-200 flex items-center gap-1 transition-colors cursor-pointer group/link"
               >
-                Executive Cabinet <ArrowUpRight className="h-3.5 w-3.5" />
+                <span>Executive Cabinet</span>
+                <ArrowUpRight className="h-3.5 w-3.5 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
               </Link>
             </div>
           </div>
@@ -318,7 +352,7 @@ export default function Home() {
             <div className="space-y-4 relative z-10">
               <div className="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400 text-[10px] font-bold uppercase tracking-wider bg-emerald-50 dark:bg-emerald-950/50 px-2.5 py-1 rounded-full border border-emerald-100 dark:border-emerald-800 w-fit">
                 <Building className="h-3.5 w-3.5" />
-                Chairman Secretariat
+                President
               </div>
 
               <p className="font-serif italic text-xs leading-relaxed text-slate-700 dark:text-slate-300">
@@ -354,7 +388,7 @@ export default function Home() {
             <div className="space-y-4 relative z-10">
               <div className="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400 text-[10px] font-bold uppercase tracking-wider bg-emerald-50 dark:bg-emerald-950/50 px-2.5 py-1 rounded-full border border-emerald-100 dark:border-emerald-800 w-fit">
                 <Landmark className="h-3.5 w-3.5" />
-                Youth PM Cabinet
+                Vice Chairman
               </div>
 
               <p className="font-serif italic text-[11px] leading-relaxed text-gray-900">
