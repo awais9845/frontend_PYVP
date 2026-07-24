@@ -15,13 +15,13 @@ export default function About() {
   return (
     <div className="bg-slate-50 dark:bg-slate-950 min-h-screen text-slate-800 dark:text-slate-200 transition-colors duration-300 font-sans">
       {/* Hero Header */}
-      <section className="bg-linear-to-b from-emerald-950 via-emerald-900 to-emerald-950 text-white py-16 px-4 border-b border-emerald-800 text-center relative overflow-hidden">
+      <section className="bg-linear-to-b from-emerald-950 via-emerald-900 to-emerald-950 text-white py-12 sm:py-16 px-4 border-b border-emerald-800 text-center relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(16,185,129,0.1),transparent_50%)]"></div>
         <div className="max-w-4xl mx-auto space-y-4 relative z-10">
           <span className="text-gold-500 text-xs font-bold uppercase tracking-widest bg-gold-500/10 px-3 py-1 rounded-full border border-gold-500/20">
             Constitutional Framework
           </span>
-          <h1 className="font-heading font-bold text-3xl sm:text-5xl tracking-tight">
+          <h1 className="font-heading font-bold text-2xl sm:text-4xl lg:text-5xl tracking-tight">
             Pakistan Youth Vision Parliament
           </h1>
           <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-2xl mx-auto font-light">
@@ -33,7 +33,7 @@ export default function About() {
       </section>
 
       {/* Main Narrative Section */}
-      <section className="py-16 max-w-7xl mx-auto px-4 md:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <section className="py-12 sm:py-16 max-w-7xl mx-auto px-4 sm:px-6 md:px-8 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
         {/* Narrative Left */}
         <div className="lg:col-span-7 space-y-6">
           <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-emerald-700 dark:text-emerald-400">
@@ -88,7 +88,7 @@ export default function About() {
         </div>
 
         {/* Narrative Right: Stately Badge */}
-        <div className="lg:col-span-5 bg-linear-to-tr from-emerald-900 to-emerald-950 p-8 rounded-2xl border border-emerald-800 text-white shadow-xl space-y-6">
+        <div className="lg:col-span-5 bg-linear-to-tr from-emerald-900 to-emerald-950 p-6 sm:p-8 rounded-2xl border border-emerald-800 text-white shadow-xl space-y-6">
           <div className="flex items-center gap-3">
             <div className="p-3 bg-emerald-800 rounded-lg text-gold-500 shadow">
               <Landmark className="h-6 w-6" />
@@ -130,8 +130,8 @@ export default function About() {
       </section>
 
       {/* 3. CORE VALUES BENTO GRID */}
-      <section className="bg-slate-100 dark:bg-slate-900 py-16 border-y border-slate-200 dark:border-slate-800">
-        <div className="max-w-7xl mx-auto px-4 md:px-8">
+      <section className="bg-slate-100 dark:bg-slate-900 py-12 sm:py-16 border-y border-slate-200 dark:border-slate-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
           <div className="text-center max-w-3xl mx-auto mb-12">
             <span className="text-emerald-600 dark:text-emerald-400 text-xs font-bold uppercase tracking-widest bg-emerald-500/10 px-3 py-1 rounded-full">
               Pillars of Excellence
@@ -141,7 +141,7 @@ export default function About() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               {
                 icon: Scale,

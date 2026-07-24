@@ -22,7 +22,7 @@ interface AuthContextType {
   notifications:      Notification[];
   stats:              SystemStats | null;
   login:              (email: string, password: string) => Promise<boolean>;
-  logout:             () => void;
+  logout:             () => Promise<void> | void;
   registerUser:       (formData: any) => Promise<boolean>;
   updateProfile:      (data: Partial<AuthUser>) => Promise<boolean>;
   refreshUser:        () => Promise<void>;
@@ -97,10 +97,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   // ── Logout ───────────────────────────────────────────────────────────────────
-  const logout = () => {
-    dispatch(logoutThunk());
+  const logout = async () => {
+    await dispatch(logoutThunk());
     setNotifications([]);
-    triggerToast("Logged Out", "You have been securely logged out.", "info");
+    triggerToast("Logout successful.", "Logout successful.", "success");
   };
 
   // ── Register (creates a User account AND submits their membership application) ──

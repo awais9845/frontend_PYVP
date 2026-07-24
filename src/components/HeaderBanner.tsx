@@ -11,12 +11,12 @@ export default function HeaderBanner() {
 
   return (
     <div className="w-full text-xs font-medium text-slate-200 bg-emerald-950 border-b border-emerald-800 selection:bg-emerald-700">
-      <div className="max-w-7xl mx-auto px-4 md:px-8 py-2 flex flex-col sm:flex-row items-center justify-between gap-2">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-8 py-2 flex flex-col sm:flex-row items-center justify-between gap-2 text-center sm:text-left">
         {/* National Crest / Portal Title */}
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 sm:gap-3">
           <div className="flex items-center gap-1.5 text-emerald-300">
             <ShieldCheck className="h-4.5 w-4.5 text-gold-500 animate-pulse" />
-            <span className="font-heading tracking-wide uppercase font-semibold">
+            <span className="font-heading tracking-wide uppercase font-semibold text-[11px] sm:text-xs">
               Welcome to the Youth Assembly
             </span>
           </div>
@@ -27,7 +27,7 @@ export default function HeaderBanner() {
         </div>
 
         {/* Dynamic Helpers */}
-        <div className="flex items-center gap-4 flex-wrap justify-center sm:justify-end">
+        <div className="flex items-center gap-2 sm:gap-4 flex-wrap justify-center sm:justify-end text-[11px] sm:text-xs">
           <div className="flex items-center gap-1.5 text-slate-300">
             <Clock className="h-3.5 w-3.5 text-emerald-400" />
             <span className="font-mono">

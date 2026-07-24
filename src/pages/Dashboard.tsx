@@ -248,7 +248,7 @@ export default function Dashboard() {
                 className="w-full py-3 bg-emerald-700 hover:bg-emerald-800 text-white font-bold rounded-lg text-xs transition-all flex items-center justify-center gap-1.5 shadow-md shadow-emerald-700/10"
               >
                 <Lock className="h-4 w-4" />
-                {loggingIn ? "Securing Session..." : "Sign In"}
+                {loggingIn ? "Signing in..." : "Sign In"}
               </button>
             </form>
 
@@ -293,7 +293,7 @@ export default function Dashboard() {
   return (
     <div className="bg-slate-50 dark:bg-slate-950 min-h-screen text-slate-800 dark:text-slate-200 transition-colors duration-300 font-sans pb-20">
       {/* Top Welcome Panel */}
-      <section className="bg-linear-to-b from-emerald-950 via-emerald-900 to-emerald-950 text-white py-12 px-4 border-b border-emerald-800">
+      <section className="bg-linear-to-b from-emerald-950 via-emerald-900 to-emerald-950 text-white py-8 sm:py-12 px-4 border-b border-emerald-800">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
           <div className="flex items-center gap-4">
             {user.profileImage?.secure_url || user.profilePic ? (
@@ -304,18 +304,18 @@ export default function Dashboard() {
                   120,
                 )}
                 alt="pic"
-                className="h-16 w-16 rounded-full object-cover border-4 border-slate-900 shadow-md"
+                className="h-14 w-14 sm:h-16 sm:w-16 rounded-full object-cover border-4 border-slate-900 shadow-md shrink-0"
                 loading="lazy"
               />
             ) : (
-              <div className="h-16 w-16 rounded-full bg-emerald-800 text-gold-200 font-bold text-2xl flex items-center justify-center border-4 border-slate-900 shadow-md">
+              <div className="h-14 w-14 sm:h-16 sm:w-16 rounded-full bg-emerald-800 text-gold-200 font-bold text-2xl flex items-center justify-center border-4 border-slate-900 shadow-md shrink-0">
                 {userInit}
               </div>
             )}
 
-            <div className="space-y-1">
-              <div className="flex items-center gap-2">
-                <h1 className="font-heading font-bold text-2xl tracking-tight text-white">
+            <div className="space-y-1 min-w-0">
+              <div className="flex flex-wrap items-center gap-2">
+                <h1 className="font-heading font-bold text-xl sm:text-2xl tracking-tight text-white truncate">
                   {user.fullName}
                 </h1>
                 <span className="text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 px-2 py-0.5 rounded font-bold uppercase tracking-wider">
@@ -324,24 +324,24 @@ export default function Dashboard() {
                     : (user.member as any)?.designation || user.role}
                 </span>
               </div>
-              <p className="text-xs text-slate-300 flex items-center gap-1">
-                <Mail className="h-3.5 w-3.5" /> {user.email}
+              <p className="text-xs text-slate-300 flex items-center gap-1 truncate">
+                <Mail className="h-3.5 w-3.5 shrink-0" /> {user.email}
               </p>
             </div>
           </div>
 
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2 w-full sm:w-auto">
             {user.role === "admin" && (
               <Link
                 to="/admin"
-                className="px-4 py-2.5 bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold rounded-lg transition-all"
+                className="px-4 py-2.5 bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold rounded-lg transition-all text-center flex-1 sm:flex-none"
               >
                 Admin Control Room
               </Link>
             )}
             <button
               onClick={logout}
-              className="px-4 py-2.5 bg-slate-900 hover:bg-slate-800 border border-emerald-800 hover:border-emerald-600 text-slate-200 text-xs font-bold rounded-lg transition-all"
+              className="px-4 py-2.5 bg-slate-900 hover:bg-slate-800 border border-emerald-800 hover:border-emerald-600 text-slate-200 text-xs font-bold rounded-lg transition-all text-center flex-1 sm:flex-none"
             >
               Close State Session
             </button>
@@ -350,7 +350,7 @@ export default function Dashboard() {
       </section>
 
       {/* Main Grid: Nav & Content */}
-      <div className="max-w-7xl mx-auto px-4 md:px-8 mt-10 grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 mt-6 sm:mt-10 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
         {/* Left Sidebar Status Badge */}
         <div className="lg:col-span-4 space-y-6">
           {/* Dossier Overview Card */}

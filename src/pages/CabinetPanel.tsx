@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { isChairmanUser } from "../services/authApi";
 import { 
   Users, Award, Landmark, Search, Plus, Trash2, Edit2, X, Eye, 
   Check, User as UserIcon, ShieldAlert, Award as AwardIcon, MapPin, Mail, AlertTriangle
@@ -240,20 +241,20 @@ export default function CabinetPanel() {
     <div className="bg-slate-50 dark:bg-slate-950 min-h-screen text-slate-800 dark:text-slate-200 transition-colors duration-300 font-sans pb-20">
       
       {/* Page Crest Header */}
-      <section className="bg-linear-to-b from-slate-950 via-slate-900 to-slate-950 text-white py-12 px-4 border-b border-slate-800">
+      <section className="bg-linear-to-b from-slate-950 via-slate-900 to-slate-950 text-white py-8 sm:py-12 px-4 border-b border-slate-800">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
               <span className="text-[10px] bg-amber-500/10 text-amber-500 border border-amber-500/25 px-2 py-0.5 rounded font-black tracking-widest uppercase">Secretariat</span>
-              <h1 className="font-heading font-extrabold text-2xl tracking-tight text-white">Cabinet Management Console</h1>
+              <h1 className="font-heading font-extrabold text-xl sm:text-2xl tracking-tight text-white">Cabinet Management Console</h1>
             </div>
             <p className="text-xs text-slate-400">Appoint registered members, configure ministerial portfolios, and manage active executive cabinets.</p>
           </div>
 
-          <div className="flex gap-2">
+          <div className="flex gap-2 w-full sm:w-auto">
             <button
               onClick={() => navigate("/dashboard")}
-              className="px-4 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold rounded-lg transition-all"
+              className="px-4 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold rounded-lg transition-all w-full sm:w-auto text-center"
             >
               Return to Dashboard
             </button>
@@ -262,7 +263,7 @@ export default function CabinetPanel() {
       </section>
 
       {/* Main Workspace Layout */}
-      <div className="max-w-7xl mx-auto px-4 md:px-8 mt-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 mt-6 sm:mt-10">
         <div className="grid grid-cols-1 xl:grid-cols-12 gap-8">
           
           {/* LEFT COLUMN: Active Cabinets Table & Registry list */}
@@ -587,9 +588,9 @@ export default function CabinetPanel() {
 
       {/* EDIT POSITION MODAL */}
       {editingCabinetMember && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-xs">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 max-w-md w-full rounded-2xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200">
-            <div className="p-6 md:p-8 space-y-6">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/80 backdrop-blur-xs">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 max-w-md w-full max-h-[90vh] overflow-y-auto rounded-2xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200">
+            <div className="p-5 sm:p-8 space-y-6">
               <div className="flex justify-between items-start">
                 <div>
                   <h4 className="font-heading font-extrabold text-lg text-slate-900 dark:text-white">Modify Appointment</h4>
@@ -657,9 +658,9 @@ export default function CabinetPanel() {
 
       {/* SECURE TERMINATION DOUBLE-CONFIRMATION MODAL */}
       {terminatingCabinetMember && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-xs">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 max-w-md w-full rounded-2xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200">
-            <div className="p-6 md:p-8 space-y-6">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/80 backdrop-blur-xs">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 max-w-md w-full max-h-[90vh] overflow-y-auto rounded-2xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200">
+            <div className="p-5 sm:p-8 space-y-6">
               
               <div className="flex gap-3 items-start text-red-600">
                 <AlertTriangle className="h-6 w-6 shrink-0 mt-0.5" />
@@ -716,8 +717,8 @@ export default function CabinetPanel() {
 
       {/* INSPECT DETAILS VIEW MODAL */}
       {viewingCabinetMember && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-xs">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 max-w-lg w-full rounded-2xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/80 backdrop-blur-xs">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 max-w-lg w-full max-h-[90vh] overflow-y-auto rounded-2xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200">
             <div className="p-6 md:p-8 space-y-6">
               <div className="flex justify-between items-start">
                 <div>

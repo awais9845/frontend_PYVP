@@ -100,7 +100,7 @@ function MainAppLayout() {
       {/* Floating System Toast Alerts */}
       {toast && (
         <div 
-          className="fixed bottom-6 right-6 z-[100] max-w-sm w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 rounded-xl shadow-2xl flex items-start gap-3 animate-in slide-in-from-bottom-5 duration-300"
+          className="fixed bottom-4 right-4 left-4 sm:left-auto sm:right-6 sm:bottom-6 z-[100] max-w-sm w-auto sm:w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 rounded-xl shadow-2xl flex items-start gap-3 animate-in slide-in-from-bottom-5 duration-300"
           style={{ boxShadow: "0 10px 30px -5px rgba(0,0,0,0.15)" }}
         >
           {toast.type === "success" && (

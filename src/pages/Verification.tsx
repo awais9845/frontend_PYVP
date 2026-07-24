@@ -122,13 +122,13 @@ export default function Verification() {
   return (
     <div className="bg-slate-50 dark:bg-slate-950 min-h-screen text-slate-800 dark:text-slate-200 transition-colors duration-300 font-sans pb-20">
       {/* ── Hero ── */}
-      <section className="bg-linear-to-b from-emerald-950 via-emerald-900 to-emerald-950 text-white py-16 px-4 border-b border-emerald-800 text-center relative overflow-hidden">
+      <section className="bg-linear-to-b from-emerald-950 via-emerald-900 to-emerald-950 text-white py-12 sm:py-16 px-4 border-b border-emerald-800 text-center relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(16,185,129,0.1),transparent_50%)]" />
         <div className="max-w-4xl mx-auto space-y-4 relative z-10">
           <span className="text-xs font-bold uppercase tracking-widest bg-white/10 px-3 py-1 rounded-full border border-white/20">
             Application Records
           </span>
-          <h1 className="font-heading font-bold text-3xl sm:text-5xl tracking-tight">
+          <h1 className="font-heading font-bold text-2xl sm:text-4xl lg:text-5xl tracking-tight">
             Verify Your Identity
           </h1>
           <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-2xl mx-auto font-light">
@@ -141,7 +141,7 @@ export default function Verification() {
 
       {/* ── Search Form ── */}
       <div className="max-w-3xl mx-auto px-4 mt-10 space-y-6">
-        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 md:p-8 shadow-sm">
+        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-5 sm:p-8 shadow-sm">
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div className="space-y-1">
               <h3 className="font-heading font-extrabold text-lg text-slate-900 dark:text-white">
@@ -156,7 +156,7 @@ export default function Verification() {
               </p>
             </div>
 
-            <div className="flex gap-2">
+            <div className="flex flex-col sm:flex-row gap-2">
               <div className="flex-1">
                 <input
                   {...register("query", {
@@ -180,7 +180,7 @@ export default function Verification() {
               <button
                 type="submit"
                 disabled={searching}
-                className="px-6 bg-emerald-700 hover:bg-emerald-800 disabled:opacity-60 text-white font-bold rounded-lg text-xs transition-all flex items-center gap-1.5 shrink-0"
+                className="px-6 py-3 sm:py-0 bg-emerald-700 hover:bg-emerald-800 disabled:opacity-60 text-white font-bold rounded-lg text-xs transition-all flex items-center justify-center gap-1.5 shrink-0"
               >
                 <Search className="h-4 w-4" />
                 {searching ? "Verifying..." : "Verify Record"}

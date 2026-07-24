@@ -240,27 +240,27 @@ export default function AdminPanel() {
     <div className="bg-slate-50 dark:bg-slate-950 min-h-screen text-slate-800 dark:text-slate-200 transition-colors duration-300 font-sans pb-20">
       
       {/* Top Admin Header Bar */}
-      <section className="bg-linear-to-b from-slate-900 via-slate-950 to-slate-900 text-white py-12 px-4 border-b border-slate-800">
+      <section className="bg-linear-to-b from-slate-900 via-slate-950 to-slate-900 text-white py-8 sm:py-12 px-4 border-b border-slate-800">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
               <span className="text-[10px] bg-amber-500/10 text-amber-500 border border-amber-500/25 px-2 py-0.5 rounded font-black tracking-widest uppercase">Secretariat</span>
-              <h1 className="font-heading font-extrabold text-2xl tracking-tight text-white">Supreme Control Console</h1>
+              <h1 className="font-heading font-extrabold text-xl sm:text-2xl tracking-tight text-white">Supreme Control Console</h1>
             </div>
             <p className="text-xs text-slate-400">Evaluate registrations, update portfolios, post news alerts, and monitor legislative analytics.</p>
           </div>
 
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2 w-full sm:w-auto">
             <button
               onClick={handleExportCSV}
-              className="px-4 py-2.5 bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold rounded-lg flex items-center gap-1.5 transition-all shadow"
+              className="px-4 py-2.5 bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold rounded-lg flex items-center justify-center gap-1.5 transition-all shadow flex-1 sm:flex-none"
             >
               <Download className="h-4 w-4" />
               Export Roster (CSV)
             </button>
             <button
               onClick={() => navigate("/dashboard")}
-              className="px-4 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold rounded-lg transition-all"
+              className="px-4 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold rounded-lg transition-all flex-1 sm:flex-none text-center"
             >
               Exit Console
             </button>
@@ -269,7 +269,7 @@ export default function AdminPanel() {
       </section>
 
       {/* Sub Tabs */}
-      <div className="max-w-7xl mx-auto px-4 md:px-8 mt-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 mt-6 sm:mt-10">
         <div className="flex gap-1.5 border-b border-slate-200 dark:border-slate-800 overflow-x-auto pb-px">
           {[
             { id: "applications", name: "Review Applications", count: pendingApps.length, icon: Users },

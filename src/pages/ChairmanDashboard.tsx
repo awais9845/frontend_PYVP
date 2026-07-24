@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { isChairmanUser } from "../services/authApi";
 import { 
   Users, Award, Landmark, Search, Plus, Trash2, Edit2, X, Eye, 
   Check, User as UserIcon, ShieldAlert, Award as AwardIcon, MapPin, Mail, AlertTriangle,
@@ -321,14 +322,14 @@ export default function ChairmanDashboard() {
     <div className="bg-slate-50 dark:bg-slate-950 min-h-screen text-slate-800 dark:text-slate-200 transition-colors duration-300 font-sans pb-20">
       
       {/* 1. Header Hero Panel */}
-      <section className="bg-linear-to-r from-emerald-950 via-slate-900 to-emerald-950 text-white py-12 px-6 border-b border-emerald-800/40 relative overflow-hidden">
+      <section className="bg-linear-to-r from-emerald-950 via-slate-900 to-emerald-950 text-white py-8 sm:py-12 px-4 sm:px-6 border-b border-emerald-800/40 relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_120%,rgba(16,185,129,0.1),transparent_40%)]"></div>
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-6 relative z-10">
           <div className="space-y-2">
             <span className="text-[10px] bg-gold-500/10 text-gold-400 border border-gold-500/25 px-2.5 py-1 rounded font-black tracking-widest uppercase">
               Chairman Cabinet Console
             </span>
-            <h1 className="font-heading font-black text-2xl sm:text-4xl tracking-tight text-white leading-tight">
+            <h1 className="font-heading font-black text-xl sm:text-3xl lg:text-4xl tracking-tight text-white leading-tight">
               Secretariat Executive Panel
             </h1>
             <p className="text-xs sm:text-sm text-slate-300 max-w-2xl font-light">
@@ -336,10 +337,10 @@ export default function ChairmanDashboard() {
             </p>
           </div>
 
-          <div className="flex gap-2">
+          <div className="flex gap-2 w-full sm:w-auto">
             <button
               onClick={() => navigate("/dashboard")}
-              className="px-4 py-2.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 text-xs font-bold rounded-lg transition-all flex items-center gap-1.5"
+              className="px-4 py-2.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 text-xs font-bold rounded-lg transition-all flex items-center justify-center gap-1.5 w-full sm:w-auto"
             >
               <UserIcon className="h-4 w-4" />
               Member Area
@@ -349,8 +350,8 @@ export default function ChairmanDashboard() {
       </section>
 
       {/* 2. Main Dashboard Navigation Tabs */}
-      <div className="max-w-7xl mx-auto px-4 md:px-8 mt-8">
-        <div className="bg-white dark:bg-slate-900 p-1 rounded-xl border border-slate-200 dark:border-slate-800 shadow-xs flex flex-wrap gap-1">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 mt-6 sm:mt-8">
+        <div className="bg-white dark:bg-slate-900 p-1 rounded-xl border border-slate-200 dark:border-slate-800 shadow-xs flex flex-wrap sm:flex-nowrap gap-1 overflow-x-auto">
           <button
             onClick={() => setActiveTab("overview")}
             className={`flex-1 py-3 px-4 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-2 ${

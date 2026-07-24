@@ -980,7 +980,7 @@ export default function ChairmanPortal() {
 
   const handleLogoutSession = () => {
     logout();
-    navigate("/");
+    navigate("/dashboard");
   };
 
   // ────────────────────────────────────────────────────────────────────────
@@ -988,27 +988,29 @@ export default function ChairmanPortal() {
   // ────────────────────────────────────────────────────────────────────────
 
   return (
-    <div className="flex min-h-screen bg-slate-100 dark:bg-slate-950 text-slate-800 dark:text-slate-200 transition-colors duration-300 font-sans">
+    <div className="flex flex-col lg:flex-row min-h-screen bg-slate-100 dark:bg-slate-950 text-slate-800 dark:text-slate-200 transition-colors duration-300 font-sans">
       {/* 1. PORTAL GREEN SIDEBAR */}
-      <aside className="w-64 bg-slate-900 border-r border-slate-800 flex flex-col justify-between shrink-0 select-none">
+      <aside className="w-full lg:w-64 xl:w-72 bg-slate-900 border-b lg:border-b-0 lg:border-r border-slate-800 flex flex-col justify-between shrink-0 select-none">
         <div>
           {/* Organisation Header */}
-          <div className="p-6 border-b border-slate-850 flex items-center gap-3">
-            <div className="h-10 w-10 rounded-full bg-emerald-700 text-white flex items-center justify-center shadow-lg">
-              <Landmark className="h-5.5 w-5.5 text-gold-200" />
-            </div>
-            <div>
-              <h2 className="font-heading font-black text-sm text-slate-100 uppercase tracking-wider">
-                PYVP Portal
-              </h2>
-              <span className="text-[10px] text-emerald-500 font-bold tracking-widest uppercase">
-                Secretariat Panel
-              </span>
+          <div className="p-4 sm:p-6 border-b border-slate-850 flex items-center justify-between lg:justify-start gap-3">
+            <div className="flex items-center gap-3">
+              <div className="h-10 w-10 rounded-full bg-emerald-700 text-white flex items-center justify-center shadow-lg shrink-0">
+                <Landmark className="h-5.5 w-5.5 text-gold-200" />
+              </div>
+              <div>
+                <h2 className="font-heading font-black text-sm text-slate-100 uppercase tracking-wider">
+                  PYVP Portal
+                </h2>
+                <span className="text-[10px] text-emerald-500 font-bold tracking-widest uppercase">
+                  Secretariat Panel
+                </span>
+              </div>
             </div>
           </div>
 
           {/* Navigation Links */}
-          <nav className="p-4 space-y-1.5 text-xs font-bold text-slate-400">
+          <nav className="p-3 sm:p-4 flex lg:flex-col gap-1.5 overflow-x-auto lg:overflow-x-visible text-xs font-bold text-slate-400">
             {[
               { id: "dashboard", label: "Dashboard Portal", icon: BarChart2 },
               { id: "executive", label: "Executive Cabinet", icon: Award },
@@ -1036,14 +1038,14 @@ export default function ChairmanPortal() {
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id as any)}
-                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 ${
+                  className={`flex items-center gap-2 lg:gap-3 px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl transition-all duration-200 shrink-0 lg:shrink text-xs whitespace-nowrap lg:whitespace-normal ${
                     isActive
                       ? "bg-emerald-800 text-white shadow-md shadow-emerald-950/20"
                       : "hover:bg-slate-800/60 hover:text-slate-200"
                   }`}
                 >
                   <TabIcon
-                    className={`h-4.5 w-4.5 ${isActive ? "text-gold-200" : "text-slate-500"}`}
+                    className={`h-4.5 w-4.5 shrink-0 ${isActive ? "text-gold-200" : "text-slate-500"}`}
                   />
                   {tab.label}
                 </button>
@@ -1052,25 +1054,25 @@ export default function ChairmanPortal() {
           </nav>
         </div>
 
-        {/* Sidebar Footer Logout */}
-        <div className="p-4 border-t border-slate-850">
+        {/* Footer Logout Button */}
+        <div className="p-4 border-t border-slate-850 hidden lg:block">
           <button
             onClick={handleLogoutSession}
-            className="w-full flex items-center justify-center gap-2.5 bg-red-950/20 hover:bg-red-950/45 text-red-400 font-bold text-xs py-3 rounded-xl border border-red-900/35 transition-all"
+            className="w-full flex items-center gap-2 px-4 py-3 rounded-xl text-xs font-bold text-slate-400 hover:text-red-400 hover:bg-slate-800/60 transition-all"
           >
-            <LogOut className="h-4.5 w-4.5" />
-            Clear Session Session
+            <LogOut className="h-4 w-4" /> Logout Session
           </button>
         </div>
       </aside>
 
-      {/* 2. MAIN PORTAL RIGHT COLUMN VIEWPORT */}
-      <main className="flex-1 flex flex-col min-w-0">
-        {/* Top bar */}
-        <header className="h-16 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-850 flex items-center justify-between px-8 shadow-xs">
-          <div className="flex items-center gap-2">
-            <span className="text-[10px] bg-gold-500/10 text-gold-600 dark:text-gold-400 border border-gold-500/25 px-2.5 py-1 rounded font-black tracking-widest uppercase">
-              Chairman Executive Access Only
+      {/* 2. MAIN SYSTEM DASHBOARD BODY */}
+      <main className="flex-1 flex flex-col min-w-0 overflow-hidden">
+        {/* Top Operational Bar */}
+        <header className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-4 sm:px-8 py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-2xs">
+          <div className="flex items-center gap-3">
+            <span className="h-2.5 w-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span className="text-xs font-bold font-mono text-slate-500 dark:text-slate-400">
+              PYVP SECRETARIAT ENCRYPTION ENFORCED
             </span>
           </div>
 

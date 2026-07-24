@@ -45,13 +45,13 @@ export default function ExecutiveTeam() {
     <div className="bg-slate-50 dark:bg-slate-950 min-h-screen text-slate-800 dark:text-slate-200 transition-colors duration-300 font-sans">
 
       {/* ── Hero ── */}
-      <section className="bg-linear-to-b from-emerald-950 via-emerald-900 to-emerald-950 text-white py-16 px-4 border-b border-emerald-800 text-center relative overflow-hidden">
+      <section className="bg-linear-to-b from-emerald-950 via-emerald-900 to-emerald-950 text-white py-12 sm:py-16 px-4 border-b border-emerald-800 text-center relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(16,185,129,0.1),transparent_50%)]" />
         <div className="max-w-4xl mx-auto space-y-4 relative z-10">
           <span className="text-xs font-bold uppercase tracking-widest bg-white/10 px-3 py-1 rounded-full border border-white/20">
             Supreme Council
           </span>
-          <h1 className="font-heading font-bold text-3xl sm:text-5xl tracking-tight">
+          <h1 className="font-heading font-bold text-2xl sm:text-4xl lg:text-5xl tracking-tight">
             The Executive Assembly &amp; Cabinet
           </h1>
           <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-2xl mx-auto font-light">
@@ -61,11 +61,11 @@ export default function ExecutiveTeam() {
       </section>
 
       {/* ── Members Grid ── */}
-      <section className="py-16 max-w-7xl mx-auto px-4 md:px-8">
+      <section className="py-12 sm:py-16 max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
 
         {/* Loading */}
         {loading && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {Array.from({ length: 6 }).map((_, i) => <MemberSkeleton key={i} />)}
           </div>
         )}
@@ -93,7 +93,7 @@ export default function ExecutiveTeam() {
 
         {/* Member Cards */}
         {!loading && !error && executiveMembers.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {executiveMembers.map((member: any, idx: number) => {
               const initials = member.fullName
                 ?.split(" ")

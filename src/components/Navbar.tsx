@@ -46,7 +46,7 @@ export default function Navbar() {
   const handleLogout = () => {
     logout();
     setIsOpen(false);
-    navigate("/");
+    navigate("/dashboard");
   };
 
   const navLinks = [
@@ -66,22 +66,22 @@ export default function Navbar() {
           : "bg-white dark:bg-slate-900 py-4 border-b border-slate-100 dark:border-slate-800"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-8 flex items-center justify-between">
         {/* Logo / Crest Title */}
-        <Link to="/" className="flex items-center gap-3 group">
-          <div className="h-11 w-11 rounded-full bg-emerald-600 dark:bg-emerald-700 text-white flex items-center justify-center shadow-md shadow-emerald-600/20 group-hover:scale-105 transition-all duration-300">
-            <Landmark className="h-6 w-6 text-gold-200" />
+        <Link to="/" className="flex items-center gap-2 sm:gap-3 group">
+          <div className="h-9 w-9 sm:h-11 sm:w-11 rounded-full bg-emerald-600 dark:bg-emerald-700 text-white flex items-center justify-center shadow-md shadow-emerald-600/20 group-hover:scale-105 transition-all duration-300 shrink-0">
+            <Landmark className="h-5 w-5 sm:h-6 sm:w-6 text-gold-200" />
           </div>
           <div>
             <div className="flex items-center gap-1.5">
-              <span className="font-heading font-bold text-lg leading-none tracking-tight text-slate-800 dark:text-slate-100">
+              <span className="font-heading font-bold text-base sm:text-lg leading-none tracking-tight text-slate-800 dark:text-slate-100">
                 PYVP
               </span>
               <span className="text-[10px] bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 px-1.5 py-0.5 rounded-full font-bold uppercase tracking-wider border border-emerald-200 dark:border-emerald-800">
                 Official
               </span>
             </div>
-            <p className="text-[10px] font-medium text-slate-500 dark:text-slate-400 leading-tight">
+            <p className="text-[9px] sm:text-[10px] font-medium text-slate-500 dark:text-slate-400 leading-tight truncate max-w-[150px] sm:max-w-none">
               Pakistan Youth Vision Parliament
             </p>
           </div>
@@ -225,7 +225,7 @@ export default function Navbar() {
 
       {/* Mobile Drawer */}
       {isOpen && (
-        <div className="lg:hidden border-t border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 py-4 space-y-3 shadow-inner animate-in fade-in slide-in-from-top-3 duration-200">
+        <div className="lg:hidden border-t border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 py-4 space-y-3 shadow-inner animate-in fade-in slide-in-from-top-3 duration-200 max-h-[85vh] overflow-y-auto">
           <div className="flex flex-col gap-1.5">
             {navLinks.map((link) => {
               const isActive = location.pathname === link.path;

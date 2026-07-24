@@ -109,11 +109,11 @@ export default function Home() {
       </div>
 
       {/* 2. BENTO GRID CONTAINER */}
-      <div className="max-w-7xl mx-auto px-4 md:px-8 py-10">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-8 py-6 sm:py-10">
         {/* Grid Structure */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-4 sm:gap-6 items-stretch">
           {/* Bento Card 1: Main Hero & Brand Statement (8 cols on desktop) */}
-          <div className="lg:col-span-8 bg-gradient-to-br from-emerald-950 via-emerald-900 to-emerald-950 text-white rounded-3xl p-8 lg:p-10 relative overflow-hidden shadow-xl border border-emerald-800/40 flex flex-col justify-between group min-h-[420px] transition-all hover:shadow-2xl">
+          <div className="md:col-span-2 lg:col-span-8 bg-gradient-to-br from-emerald-950 via-emerald-900 to-emerald-950 text-white rounded-3xl p-5 sm:p-8 lg:p-10 relative overflow-hidden shadow-xl border border-emerald-800/40 flex flex-col justify-between group min-h-[360px] sm:min-h-[420px] transition-all hover:shadow-2xl">
             {/* Background glowing gradients */}
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(16,185,129,0.15),transparent_50%)]"></div>
             <div className="absolute -bottom-16 -right-16 w-96 h-96 bg-gold-600/10 rounded-full blur-3xl group-hover:bg-gold-600/15 transition-all duration-500"></div>
@@ -158,7 +158,7 @@ export default function Home() {
           </div>
 
           {/* Bento Card 2: Quick Credentials Registry Search (4 cols on desktop) */}
-          <div className="lg:col-span-4 bg-indigo-50/50 dark:bg-slate-900 border border-indigo-100 dark:border-slate-800 rounded-3xl p-6 shadow-sm flex flex-col justify-between group transition-all hover:shadow-md">
+          <div className="md:col-span-1 lg:col-span-4 bg-indigo-50/50 dark:bg-slate-900 border border-indigo-100 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-sm flex flex-col justify-between group transition-all hover:shadow-md">
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <span className="text-indigo-700 dark:text-indigo-400 text-[10px] font-bold uppercase tracking-wider bg-indigo-100 dark:bg-indigo-950/50 px-2.5 py-1 rounded-full border border-indigo-200 dark:border-indigo-900/40">
@@ -222,7 +222,7 @@ export default function Home() {
           </div>
 
           {/* Bento Card 3: Circular Progress Stat Card (4 cols on desktop) */}
-          <div className="lg:col-span-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm flex flex-col justify-between group transition-all hover:shadow-md">
+          <div className="md:col-span-1 lg:col-span-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-sm flex flex-col justify-between group transition-all hover:shadow-md">
             <div>
               <div className="flex items-center justify-between">
                 <span className="text-emerald-700 dark:text-emerald-400 text-[10px] font-bold uppercase tracking-wider bg-emerald-50 dark:bg-emerald-950/50 px-2.5 py-1 rounded-full border border-emerald-100 dark:border-emerald-800">
@@ -243,7 +243,7 @@ export default function Home() {
             </div>
 
             {/* Beautiful SVG Progress Gauge */}
-            <div className="flex items-center gap-6 my-4">
+            <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 my-4">
               <div className="relative h-20 w-20 flex items-center justify-center shrink-0">
                 <svg
                   className="absolute transform -rotate-90"
@@ -280,14 +280,14 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="space-y-1.5 text-xs text-slate-600 dark:text-slate-300">
-                <div className="flex items-center gap-1.5">
+              <div className="space-y-1.5 text-xs text-slate-600 dark:text-slate-300 text-center sm:text-left">
+                <div className="flex items-center justify-center sm:justify-start gap-1.5">
                   <div className="h-2.5 w-2.5 rounded-full bg-emerald-600 dark:bg-emerald-400"></div>
                   <span>
                     <strong>{approvedMembers}</strong> Approved Members
                   </span>
                 </div>
-                <div className="flex items-center gap-1.5">
+                <div className="flex items-center justify-center sm:justify-start gap-1.5">
                   <div className="h-2.5 w-2.5 rounded-full bg-slate-200 dark:bg-slate-700"></div>
                   <span>
                     <strong>500</strong> Allocated Districts
@@ -303,7 +303,7 @@ export default function Home() {
           </div>
 
           {/* Bento Card 4: Chairman Syed Hammad Hassan message (4 cols on desktop) */}
-          <div className="lg:col-span-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm flex flex-col justify-between group transition-all hover:shadow-md relative overflow-hidden">
+          <div className="md:col-span-1 lg:col-span-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-sm flex flex-col justify-between group transition-all hover:shadow-md relative overflow-hidden">
             <div className="absolute top-0 right-0 p-4 opacity-[0.03] dark:opacity-[0.04]">
               <Quote className="h-32 w-32 text-emerald-950 dark:text-white" />
             </div>
@@ -339,7 +339,7 @@ export default function Home() {
           </div>
 
           {/* Bento Card 5: Youth PM Waqar Ahmad Khattak message (4 cols on desktop) */}
-          <div className="lg:col-span-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm flex flex-col justify-between group transition-all hover:shadow-md relative overflow-hidden">
+          <div className="md:col-span-1 lg:col-span-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-sm flex flex-col justify-between group transition-all hover:shadow-md relative overflow-hidden">
             <div className="absolute top-0 right-0 p-4 opacity-[0.03] dark:opacity-[0.04]">
               <Quote className="h-32 w-32 text-emerald-950 dark:text-white" />
             </div>
@@ -375,7 +375,7 @@ export default function Home() {
           </div>
 
           {/* Bento Card 6: Legislative News & Bulletins (6 cols on desktop) */}
-          <div className="lg:col-span-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm flex flex-col justify-between group transition-all hover:shadow-md">
+          <div className="md:col-span-2 lg:col-span-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-sm flex flex-col justify-between group transition-all hover:shadow-md">
             <div>
               <div className="flex items-center justify-between mb-4">
                 <span className="text-emerald-700 dark:text-emerald-400 text-[10px] font-bold uppercase tracking-wider bg-emerald-50 dark:bg-emerald-950/50 px-2.5 py-1 rounded-full border border-emerald-100 dark:border-emerald-800">
@@ -474,7 +474,7 @@ export default function Home() {
           </div>
 
           {/* Bento Card 7: Events Timetable / Calendar (6 cols on desktop) */}
-          <div className="lg:col-span-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm flex flex-col justify-between group transition-all hover:shadow-md">
+          <div className="md:col-span-2 lg:col-span-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-sm flex flex-col justify-between group transition-all hover:shadow-md">
             <div>
               <div className="flex items-center justify-between mb-4">
                 <span className="text-emerald-700 dark:text-emerald-400 text-[10px] font-bold uppercase tracking-wider bg-emerald-50 dark:bg-emerald-950/50 px-2.5 py-1 rounded-full border border-emerald-100 dark:border-emerald-800">
@@ -576,7 +576,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-6 items-stretch">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-6 items-stretch">
             {[
               {
                 step: "01",
@@ -630,8 +630,8 @@ export default function Home() {
 
       {/* 4. EXPANDED NEWS DIALOG */}
       {selectedNews && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-xs">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 max-w-2xl w-full rounded-2xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/80 backdrop-blur-xs">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 max-w-2xl w-full max-h-[90vh] overflow-y-auto rounded-2xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200">
             <div className="p-6 md:p-8 space-y-4">
               <div className="flex justify-between items-start">
                 <span className="bg-emerald-50 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded">

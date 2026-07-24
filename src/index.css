@@ -26,6 +26,30 @@
   --color-gold-700: #9e641e;
 }
 
+@layer base {
+  button,
+  a,
+  select,
+  summary,
+  [role="button"],
+  [type="button"],
+  [type="reset"],
+  [type="submit"],
+  [type="checkbox"],
+  [type="radio"],
+  label {
+    cursor: pointer;
+  }
+
+  button:disabled,
+  [type="button"]:disabled,
+  [type="reset"]:disabled,
+  [type="submit"]:disabled,
+  :disabled {
+    cursor: not-allowed;
+  }
+}
+
 @layer utilities {
   /* Elegant glassmorphism class */
   .glass-card {

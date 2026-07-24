@@ -183,13 +183,13 @@ export default function Registration() {
   return (
     <div className="bg-slate-50 dark:bg-slate-950 min-h-screen text-slate-800 dark:text-slate-200 transition-colors duration-300 font-sans pb-20">
       {/* Hero Header */}
-      <section className="bg-linear-to-b from-emerald-950 via-emerald-900 to-emerald-950 text-white py-16 px-4 border-b border-emerald-800 text-center relative overflow-hidden">
+      <section className="bg-linear-to-b from-emerald-950 via-emerald-900 to-emerald-950 text-white py-12 sm:py-16 px-4 border-b border-emerald-800 text-center relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(16,185,129,0.1),transparent_50%)]"></div>
         <div className="max-w-4xl mx-auto space-y-4 relative z-10">
           <span className="text-gold-500 text-xs font-bold uppercase tracking-widest bg-gold-500/10 px-3 py-1 rounded-full border border-gold-500/20">
             Intake Registry
           </span>
-          <h1 className="font-heading font-bold text-3xl sm:text-5xl tracking-tight">
+          <h1 className="font-heading font-bold text-2xl sm:text-4xl lg:text-5xl tracking-tight">
             PYVP National Intake 2026
           </h1>
           <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-2xl mx-auto font-light">
@@ -201,7 +201,7 @@ export default function Registration() {
 
       {/* Navigation Tabs */}
       <div className="max-w-4xl mx-auto px-4 mt-10">
-        <div className="bg-white dark:bg-slate-900 p-1.5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm grid grid-cols-2">
+        <div className="bg-white dark:bg-slate-900 p-1.5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm grid grid-cols-1 sm:grid-cols-2 gap-2">
           <button
             onClick={() => setActiveTab("apply")}
             className={`py-3 rounded-lg text-sm font-bold transition-all flex items-center justify-center gap-2 ${
@@ -233,8 +233,8 @@ export default function Registration() {
         {activeTab === "apply" && (
           <div className="space-y-6">
             {/* Payment Guide Disclaimer Card */}
-            <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 md:p-8 shadow-sm grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-              <div className="md:col-span-8 space-y-4">
+            <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-5 sm:p-8 shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+              <div className="lg:col-span-8 space-y-4">
                 <span className="text-[10px] bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/25 px-2 py-0.5 rounded font-bold uppercase tracking-wider">
                   Important Fee Notice
                 </span>
@@ -266,7 +266,7 @@ export default function Registration() {
                 </div>
               </div>
 
-              <div className="md:col-span-4 bg-emerald-50 dark:bg-emerald-950/40 p-6 rounded-xl border border-emerald-100 dark:border-emerald-800 text-center space-y-3">
+              <div className="lg:col-span-4 bg-emerald-50 dark:bg-emerald-950/40 p-6 rounded-xl border border-emerald-100 dark:border-emerald-800 text-center space-y-3">
                 <CreditCard className="h-10 w-10 text-emerald-700 dark:text-emerald-400 mx-auto" />
                 <div className="space-y-1">
                   <span className="block text-[11px] text-slate-400 font-bold uppercase tracking-wide">
