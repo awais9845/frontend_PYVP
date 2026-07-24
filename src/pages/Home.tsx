@@ -203,7 +203,7 @@ export default function Home() {
                       chairmanPic ||
                         "https://res.cloudinary.com/rgvvrye1/image/upload/v1784964927/pyvp/profiles/s9alen2npfw3olc7wwsx.jpg",
                       160,
-                      160
+                      160,
                     )}
                     alt="Hafiz Huzaifa Shah"
                     className="relative h-16 w-16 sm:h-20 sm:w-20 rounded-full object-cover border-2 border-slate-900 shadow-xl group-hover:scale-105 transition-transform duration-300"
@@ -240,8 +240,8 @@ export default function Home() {
                   engagement, policy dialogue, and national unity, we are
                   committed to providing every young person with a platform to
                   learn, lead, and serve.
-                  <br className="my-1" /> Together, let us build a stronger, more
-                  progressive, and united Pakistan.
+                  <br className="my-1" /> Together, let us build a stronger,
+                  more progressive, and united Pakistan.
                 </p>
               </div>
             </div>
@@ -366,14 +366,14 @@ export default function Home() {
 
             <div className="flex items-center gap-3.5 pt-6 border-t border-slate-100 dark:border-slate-800 mt-4 relative z-10">
               <div className="h-10 w-10 rounded-full bg-emerald-800 text-white flex items-center justify-center font-bold text-sm border border-emerald-500 shadow-sm">
-                HS
+                HH
               </div>
               <div>
                 <h4 className="font-heading font-extrabold text-slate-900 dark:text-white text-xs">
-                  Huzaifa Shah
+                  Hafiz Huzaifa Shah
                 </h4>
                 <p className="text-[10px] text-emerald-700 dark:text-emerald-400 font-semibold uppercase tracking-wider">
-                  Chairman, PYVP
+                  President, PYVP
                 </p>
               </div>
             </div>
@@ -388,7 +388,7 @@ export default function Home() {
             <div className="space-y-4 relative z-10">
               <div className="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400 text-[10px] font-bold uppercase tracking-wider bg-emerald-50 dark:bg-emerald-950/50 px-2.5 py-1 rounded-full border border-emerald-100 dark:border-emerald-800 w-fit">
                 <Landmark className="h-3.5 w-3.5" />
-                Vice Chairman
+                Vice President
               </div>
 
               <p className="font-serif italic text-[11px] leading-relaxed text-gray-900">
@@ -402,14 +402,14 @@ export default function Home() {
 
             <div className="flex items-center gap-3.5 pt-6 border-t border-slate-100 dark:border-slate-800 mt-4 relative z-10">
               <div className="h-10 w-10 rounded-full bg-gold-600 text-slate-950 flex items-center justify-center font-bold text-sm border border-gold-500 shadow-sm">
-                WK
+                MI
               </div>
               <div>
                 <h4 className="font-heading font-extrabold text-slate-900 dark:text-white text-xs">
-                  Waqar Ahmad Khattak
+                  Malik Ihtisham
                 </h4>
                 <p className="text-[10px] text-gold-600 dark:text-gold-400 font-semibold uppercase tracking-wider">
-                  Youth Prime Minister
+                  Youth Vice President
                 </p>
               </div>
             </div>
