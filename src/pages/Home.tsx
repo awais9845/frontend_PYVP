@@ -88,9 +88,9 @@ export default function Home() {
     .slice(0, 2);
 
   // Stats placeholders in case server returns empty
-  const totalRegs = stats?.totalApplicants || 3820;
-  const approvedMembers = stats?.approvedMembers || 480;
-  const provincesRep = Object.keys(stats?.provincesStats || {}).length || 7;
+  const totalRegs = stats?.totalApplicants || 200;
+  const approvedMembers = stats?.approvedMembers || 200;
+  const provincesRep = Object.keys(stats?.provincesStats || {}).length || 5;
   const sessionsCount = 4;
 
   return (
@@ -331,7 +331,7 @@ export default function Home() {
                 <div className="flex items-center justify-center sm:justify-start gap-1.5">
                   <div className="h-2.5 w-2.5 rounded-full bg-slate-200 dark:bg-slate-700"></div>
                   <span>
-                    <strong>500</strong> Allocated Districts
+                    <strong>200</strong> Allocated Districts
                   </span>
                 </div>
               </div>
