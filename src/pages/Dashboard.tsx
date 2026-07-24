@@ -106,10 +106,10 @@ export default function Dashboard() {
     if (!email || !password) return;
 
     setLoggingIn(true);
-    console.log("Outgoing Login Request Payload:", {
-      email,
-      password: "●●●●●●●●",
-    });
+    // console.log("Outgoing Login Request Payload:", {
+    //   email,
+    //   password: "●●●●●●●●",
+    // });
     const ok = await login(email, password);
     setLoggingIn(false);
   };
@@ -319,7 +319,9 @@ export default function Dashboard() {
                   {user.fullName}
                 </h1>
                 <span className="text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 px-2 py-0.5 rounded font-bold uppercase tracking-wider">
-                  {isChairman ? "Chairman" : ((user.member as any)?.designation || user.role)}
+                  {isChairman
+                    ? "Chairman"
+                    : (user.member as any)?.designation || user.role}
                 </span>
               </div>
               <p className="text-xs text-slate-300 flex items-center gap-1">
