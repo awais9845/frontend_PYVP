@@ -252,7 +252,7 @@ export default function Registration() {
                       EasyPaisa Account Title:
                     </span>
                     <strong className="text-slate-800 dark:text-slate-200">
-                      Muhammad Waqar
+                      Asim Ali Khan
                     </strong>
                   </div>
                   <div className="flex justify-between">
@@ -260,7 +260,7 @@ export default function Registration() {
                       EasyPaisa Account Number:
                     </span>
                     <strong className="text-emerald-700 dark:text-emerald-400 font-mono text-sm">
-                      +92 334 9876543
+                      +92 3221570196
                     </strong>
                   </div>
                 </div>
