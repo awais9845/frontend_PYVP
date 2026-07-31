@@ -312,7 +312,7 @@ export default function Dashboard() {
                 {userInit}
               </div>
             )}
-
+            console.log( user.profileImage?.secure_url);
             <div className="space-y-1 min-w-0">
               <div className="flex flex-wrap items-center gap-2">
                 <h1 className="font-heading font-bold text-xl sm:text-2xl tracking-tight text-white truncate">
