@@ -64,6 +64,7 @@ export default function ChairmanPortal() {
 
   // Authentication access control
   const isChairman = isChairmanUser(user);
+  const [portalImgError, setPortalImgError] = useState(false);
 
   useEffect(() => {
     if (!user || !isChairman) {
@@ -1076,19 +1077,40 @@ export default function ChairmanPortal() {
             </span>
           </div>
 
-          <div className="flex items-center gap-4">
-            <div className="text-right">
-              <h4 className="font-heading font-bold text-xs text-slate-900 dark:text-white leading-none">
-                {user?.fullName}
-              </h4>
-              <span className="text-[10px] text-slate-400 font-medium font-mono">
-                {user?.email}
-              </span>
-            </div>
-            <div className="h-9 w-9 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold border border-emerald-350 shadow-inner">
-              {user?.fullName?.charAt(0)}
-            </div>
-          </div>
+          {(() => {
+            const portalAvatarUrl =
+              user?.profilePic ||
+              (typeof (user as any)?.profileImage === "string"
+                ? (user as any).profileImage
+                : user?.profileImage?.secure_url) ||
+              (user as any)?.member?.profileImage ||
+              "";
+
+            return (
+              <div className="flex items-center gap-4">
+                <div className="text-right">
+                  <h4 className="font-heading font-bold text-xs text-slate-900 dark:text-white leading-none">
+                    {user?.fullName}
+                  </h4>
+                  <span className="text-[10px] text-slate-400 font-medium font-mono">
+                    {user?.email}
+                  </span>
+                </div>
+                {portalAvatarUrl && !portalImgError ? (
+                  <img
+                    src={portalAvatarUrl}
+                    alt="Chairman Profile"
+                    onError={() => setPortalImgError(true)}
+                    className="h-9 w-9 rounded-full object-cover border border-emerald-500 shadow-inner shrink-0"
+                  />
+                ) : (
+                  <div className="h-9 w-9 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold border border-emerald-350 shadow-inner shrink-0">
+                    {(user?.fullName || "C").charAt(0)}
+                  </div>
+                )}
+              </div>
+            );
+          })()}
         </header>
 
         {/* Dynamic content wrapper */}

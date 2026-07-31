@@ -21,6 +21,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isDark, setIsDark] = useState(false);
+  const [navImgError, setNavImgError] = useState(false);
 
   const isChairmanOnly = isChairmanUser(user);
 
@@ -139,10 +140,11 @@ export default function Navbar() {
                 to="/dashboard"
                 className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all"
               >
-                {avatarUrl ? (
+                {avatarUrl && !navImgError ? (
                   <img
                     src={avatarUrl}
                     alt="pic"
+                    onError={() => setNavImgError(true)}
                     className="h-7 w-7 rounded-full object-cover border border-emerald-600"
                   />
                 ) : (
@@ -257,10 +259,11 @@ export default function Navbar() {
             {user ? (
               <div className="space-y-2.5">
                 <div className="flex items-center gap-3 px-4">
-                  {avatarUrl ? (
+                  {avatarUrl && !navImgError ? (
                     <img
                       src={avatarUrl}
                       alt="pic"
+                      onError={() => setNavImgError(true)}
                       className="h-9 w-9 rounded-full object-cover border border-emerald-600"
                     />
                   ) : (
