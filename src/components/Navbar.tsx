@@ -24,6 +24,15 @@ export default function Navbar() {
 
   const isChairmanOnly = isChairmanUser(user);
 
+  const avatarUrl =
+    user?.profilePic ||
+    (typeof (user as any)?.profileImage === "string"
+      ? (user as any).profileImage
+      : user?.profileImage?.secure_url) ||
+    (user as any)?.member?.profileImage ||
+    "";
+
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
@@ -130,15 +139,15 @@ export default function Navbar() {
                 to="/dashboard"
                 className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all"
               >
-                {user.profilePic ? (
+                {avatarUrl ? (
                   <img
-                    src={user.profilePic}
+                    src={avatarUrl}
                     alt="pic"
                     className="h-7 w-7 rounded-full object-cover border border-emerald-600"
                   />
                 ) : (
                   <div className="h-7 w-7 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 flex items-center justify-center font-bold text-xs border border-emerald-300">
-                    {user.fullName.charAt(0)}
+                    {(user?.fullName || "U").charAt(0)}
                   </div>
                 )}
                 <span className="max-w-[120px] truncate">{user.fullName}</span>
@@ -248,15 +257,15 @@ export default function Navbar() {
             {user ? (
               <div className="space-y-2.5">
                 <div className="flex items-center gap-3 px-4">
-                  {user.profilePic ? (
+                  {avatarUrl ? (
                     <img
-                      src={user.profilePic}
+                      src={avatarUrl}
                       alt="pic"
                       className="h-9 w-9 rounded-full object-cover border border-emerald-600"
                     />
                   ) : (
                     <div className="h-9 w-9 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 flex items-center justify-center font-bold text-sm border border-emerald-300">
-                      {user.fullName.charAt(0)}
+                      {(user?.fullName || "U").charAt(0)}
                     </div>
                   )}
                   <div>
@@ -264,7 +273,7 @@ export default function Navbar() {
                       {user.fullName}
                     </h4>
                     <p className="text-xs text-slate-500 dark:text-slate-400 capitalize">
-                      {(user.member as any)?.designation || user.role} Account
+                      {isChairmanOnly ? "Chairman of PYVP" : (user.member as any)?.designation || `${user.role} Account`}
                     </p>
                   </div>
                 </div>
