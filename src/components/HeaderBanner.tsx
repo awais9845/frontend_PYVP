@@ -45,7 +45,7 @@ export default function HeaderBanner() {
             className="flex items-center gap-1 hover:text-gold-500 transition-colors"
           >
             <Phone className="h-3 w-3 text-gold-500" />
-            <span>+92 51 111-PYVP</span>
+            <span>+92 335 5327509-PYVP</span>
           </a>
           <div className="h-3 w-[1px] bg-emerald-800"></div>
           <div className="flex items-center gap-1.5 bg-emerald-900/50 px-2 py-0.5 rounded border border-emerald-800 cursor-pointer hover:bg-emerald-800/50 transition-all text-emerald-300 hover:text-emerald-100">

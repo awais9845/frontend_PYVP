@@ -107,10 +107,10 @@ export default function Footer() {
               <li className="flex items-center gap-2.5">
                 <Mail className="h-4 w-4 text-emerald-500" />
                 <a
-                  href="mailto:info@pyvp.gov.pk"
+                  href="mailto: Pakistanyouthvisionp@gmail.com"
                   className="hover:text-emerald-400 transition-colors"
                 >
-                  info@pyvp.gov.pk
+                  Pakistanyouthvisionp@gmail.com
                 </a>
               </li>
               <li className="flex items-center gap-2.5">
@@ -119,7 +119,7 @@ export default function Footer() {
                   href="tel:+9251111998"
                   className="hover:text-emerald-400 transition-colors"
                 >
-                  +92 51 111-7987
+                  +92 335 5327509
                 </a>
               </li>
             </ul>
