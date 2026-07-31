@@ -343,7 +343,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Bento Card 4: Chairman Syed Hammad Hassan message (4 cols on desktop) */}
+          {/* Bento Card 4: Chairman Hafiz Huzaifa Shah message (4 cols on desktop) */}
           <div className="md:col-span-1 lg:col-span-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-sm flex flex-col justify-between group transition-all hover:shadow-md relative overflow-hidden">
             <div className="absolute top-0 right-0 p-4 opacity-[0.03] dark:opacity-[0.04]">
               <Quote className="h-32 w-32 text-emerald-950 dark:text-white" />
