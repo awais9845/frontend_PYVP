@@ -730,7 +730,7 @@ export default function Dashboard() {
                     <div className="text-right">
                       <span className="block">AUTHORIZED SIGNATURE:</span>
                       <span className="text-gold-500 font-serif font-semibold italic text-[10px]">
-                        Hafiz Huzaifa Shah
+                        Syed Hammad Hassan
                       </span>
                     </div>
                   </div>
