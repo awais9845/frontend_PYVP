@@ -24,15 +24,6 @@ export default function Navbar() {
 
   const isChairmanOnly = isChairmanUser(user);
 
-  const avatarUrl =
-    user?.profilePic ||
-    (typeof (user as any)?.profileImage === "string"
-      ? (user as any).profileImage
-      : user?.profileImage?.secure_url) ||
-    (user as any)?.member?.profileImage ||
-    "";
-
-
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
@@ -139,9 +130,9 @@ export default function Navbar() {
                 to="/dashboard"
                 className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all"
               >
-                {avatarUrl ? (
+                {user.profilePic ? (
                   <img
-                    src={avatarUrl}
+                    src={user.profilePic}
                     alt="pic"
                     className="h-7 w-7 rounded-full object-cover border border-emerald-600"
                   />
@@ -257,9 +248,9 @@ export default function Navbar() {
             {user ? (
               <div className="space-y-2.5">
                 <div className="flex items-center gap-3 px-4">
-                  {avatarUrl ? (
+                  {user.profilePic ? (
                     <img
-                      src={avatarUrl}
+                      src={user.profilePic}
                       alt="pic"
                       className="h-9 w-9 rounded-full object-cover border border-emerald-600"
                     />
