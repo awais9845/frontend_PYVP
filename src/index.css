@@ -27,6 +27,16 @@
 }
 
 @layer base {
+  html,
+  body {
+    overflow-x: hidden;
+    max-width: 100vw;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+
   button,
   a,
   select,
@@ -70,6 +80,20 @@
   
   .glow-gold {
     box-shadow: 0 0 20px rgba(217, 160, 65, 0.15);
+  }
+
+  /* Responsive Table Container */
+  .table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
+  }
+
+  /* Prevent string blowouts on small mobile screens */
+  .break-word-force {
+    overflow-wrap: anywhere;
+    word-break: break-word;
   }
 }
 

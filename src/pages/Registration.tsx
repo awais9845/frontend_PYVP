@@ -408,7 +408,7 @@ export default function Registration() {
                     Choose Your Constituency
                   </h3>
 
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                     <div className="space-y-1.5">
                       <label className="text-xs font-bold text-slate-500">
                         Identity CNIC or B-Form Number{" "}
@@ -464,7 +464,7 @@ export default function Registration() {
                     Personal and Academic Information
                   </h3>
 
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                     <div className="space-y-1.5">
                       <label className="text-xs font-bold text-slate-500">
                         Select Gender <span className="text-red-500">*</span>

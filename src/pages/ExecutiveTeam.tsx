@@ -168,7 +168,7 @@ export default function ExecutiveTeam() {
                   </div>
 
                   {/* Footer */}
-                  <div className="px-6 py-4 bg-slate-50 dark:bg-slate-900/40 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs">
+                  <div className="px-6 py-4 bg-slate-50 dark:bg-slate-900/40 border-t border-slate-100 dark:border-slate-800 flex flex-wrap items-center justify-between gap-2 text-xs">
                     {email ? (
                       <a
                         href={`mailto:${email}`}

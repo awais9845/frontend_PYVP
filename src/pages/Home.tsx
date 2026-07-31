@@ -391,7 +391,7 @@ export default function Home() {
                 Vice President
               </div>
 
-              <p className="font-serif italic text-[11px] leading-relaxed text-gray-900">
+              <p className="font-serif italic text-[11px] leading-relaxed text-slate-800 dark:text-slate-200">
                 "We need to improve the traditional law-making process by using
                 modern technology. As Youth PM, I am committed to creating
                 digital platforms for public feedback and online training

@@ -332,7 +332,7 @@ export default function Navbar() {
                     logout();
                     setIsOpen(false);
                   }}
-                  className="flex items-center justify-center border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-200 font-bold text-sm py-2.5 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800"
+                  className="flex items-center justify-center border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-200 font-bold text-xs sm:text-sm py-2.5 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800"
                 >
                   Sign In
                 </Link>
@@ -342,7 +342,7 @@ export default function Navbar() {
                     logout();
                     setIsOpen(false);
                   }}
-                  className="flex items-center justify-center bg-emerald-700 text-white font-bold text-sm py-2.5 rounded-lg shadow-sm"
+                  className="flex items-center justify-center bg-emerald-700 text-white font-bold text-xs sm:text-sm py-2.5 rounded-lg shadow-sm"
                 >
                   Apply Online
                 </Link>

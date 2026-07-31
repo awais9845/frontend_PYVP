@@ -108,7 +108,7 @@ export default function Footer() {
                 <Mail className="h-4 w-4 text-emerald-500" />
                 <a
                   href="mailto: Pakistanyouthvisionp@gmail.com"
-                  className="hover:text-emerald-400 transition-colors"
+                  className="hover:text-emerald-400 transition-colors break-all"
                 >
                   Pakistanyouthvisionp@gmail.com
                 </a>

@@ -48,7 +48,7 @@ function MainAppLayout() {
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-200 transition-colors duration-300">
+    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-200 transition-colors duration-300 overflow-x-hidden w-full max-w-full">
       {/* Government Portal Top Ribbon */}
       <HeaderBanner />
 
@@ -56,7 +56,7 @@ function MainAppLayout() {
       <Navbar />
 
       {/* Main Content Area */}
-      <main className="flex-1">
+      <main className="flex-1 w-full max-w-full overflow-x-hidden">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
