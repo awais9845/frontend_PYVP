@@ -573,7 +573,8 @@ export default function Registration() {
                     {/* CNIC/B-Form Copy */}
                     <div className="space-y-2">
                       <label className="text-xs font-bold text-slate-500">
-                        Identity Doc Copy (CNIC) optional
+                        Identity Doc Copy (CNIC){" "}
+                        <span className="text-red-500">optional</span>
                       </label>
                       <div className="border-2 border-dashed border-slate-200 dark:border-slate-800 rounded-xl p-4 text-center bg-slate-50/50 dark:bg-slate-950 hover:border-emerald-500 transition-all cursor-pointer relative">
                         <input
