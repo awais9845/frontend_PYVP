@@ -365,6 +365,7 @@ export default function Registration() {
                         required
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
+                        autoComplete="off"
                         placeholder="e.g. candidate@example.com"
                         className="w-full px-4 py-2.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-950 focus:border-emerald-600 outline-none text-xs"
                       />
@@ -395,6 +396,7 @@ export default function Registration() {
                         required
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
+                        autoComplete="new-password"
                         placeholder="Password for dashboard sign in"
                         className="w-full px-4 py-2.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-950 focus:border-emerald-600 outline-none text-xs"
                       />
